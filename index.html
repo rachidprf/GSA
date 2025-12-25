@@ -271,47 +271,47 @@
                 </div>
                 <div class="options">
                     <div class="option-row">
-                        <input type="radio" id="origine1" name="origine" value="بلدية أكادير" required>
-                        <label for="origine1">بلدية أكادير</label>
+                        <input type="radio" id="origine1" name="origine" value="جماعة أكادير" required>
+                        <label for="origine1">جماعة أكادير</label>
                     </div>
                     <div class="conditional" id="communeAgadirDetail">
                         <input type="text" class="text-input" name="communeAgadirDetail" placeholder="يرجى تحديد الحي أو المنطقة/الفندق لغير المقيمين">
                     </div>
                     
                     <div class="option-row">
-                        <input type="radio" id="origine2" name="origine" value="بلدية إنزكان">
-                        <label for="origine2">بلدية إنزكان</label>
+                        <input type="radio" id="origine2" name="origine" value="جماعة إنزكان">
+                        <label for="origine2">جماعة إنزكان</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine3" name="origine" value="بلدية أورير">
-                        <label for="origine3">بلدية أورير</label>
+                        <input type="radio" id="origine3" name="origine" value="جماعة أورير">
+                        <label for="origine3">جماعة أورير</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine4" name="origine" value="بلدية الدراركة">
-                        <label for="origine4">بلدية الدراركة</label>
+                        <input type="radio" id="origine4" name="origine" value="جماعة الدراركة">
+                        <label for="origine4">جماعة الدراركة</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine5" name="origine" value="بلدية آيت ملول">
-                        <label for="origine5">بلدية آيت ملول</label>
+                        <input type="radio" id="origine5" name="origine" value="جماعة آيت ملول">
+                        <label for="origine5">جماعة آيت ملول</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine6" name="origine" value="بلدية الدشيرة">
-                        <label for="origine6">بلدية الدشيرة</label>
+                        <input type="radio" id="origine6" name="origine" value="جماعة الدشيرة">
+                        <label for="origine6">جماعة الدشيرة</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine7" name="origine" value="بلدية القليعة">
-                        <label for="origine7">بلدية القليعة</label>
+                        <input type="radio" id="origine7" name="origine" value="جماعة القليعة">
+                        <label for="origine7">جماعة القليعة</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine8" name="origine" value="بلدية تغازوت">
-                        <label for="origine8">بلدية تغازوت</label>
+                        <input type="radio" id="origine8" name="origine" value="جماعة تغازوت">
+                        <label for="origine8">جماعة تغازوت</label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="origine9" name="origine" value="بلدية/مدينة أخرى">
-                        <label for="origine9">بلدية/مدينة أخرى : يرجى التحديد</label>
+                        <input type="radio" id="origine9" name="origine" value="جماعة/مدينة أخرى">
+                        <label for="origine9">جماعة/مدينة أخرى : يرجى التحديد</label>
                     </div>
                     <div class="conditional" id="autreCommuneDetail">
-                        <input type="text" class="text-input" name="autreCommuneDetail" placeholder="يرجى تحديد البلدية أو المدينة">
+                        <input type="text" class="text-input" name="autreCommuneDetail" placeholder="يرجى تحديد الجماعة أو المدينة">
                     </div>
                 </div>
             </div>
@@ -455,10 +455,10 @@
                                 <strong>خارج منطقة الملعب :</strong>
                                 <div class="option-row">
                                     <input type="radio" id="park5" name="parking" value="خارج منطقة الملعب">
-                                    <label for="park5">يرجى تحديد الجادة/الشارع :</label>
+                                    <label for="park5">يرجى تحديد الشارع :</label>
                                 </div>
                                 <div class="conditional" id="exterieurDetail">
-                                    <input type="text" class="text-input" name="exterieurDetail" placeholder="اسم الجادة أو الشارع">
+                                    <input type="text" class="text-input" name="exterieurDetail" placeholder="اسم الشارع">
                                 </div>
                             </div>
                         </div>
@@ -529,13 +529,13 @@
         document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
             input.addEventListener('change', function() {
                 // مكان الانطلاق
-                if (this.name === 'origine' && this.value === 'بلدية أكادير') {
+                if (this.name === 'origine' && this.value === 'جماعة أكادير') {
                     document.getElementById('communeAgadirDetail').classList.add('show');
                 } else if (this.name === 'origine') {
                     document.getElementById('communeAgadirDetail').classList.remove('show');
                 }
                 
-                if (this.name === 'origine' && this.value === 'بلدية/مدينة أخرى') {
+                if (this.name === 'origine' && this.value === 'جماعة/مدينة أخرى') {
                     document.getElementById('autreCommuneDetail').classList.add('show');
                 } else if (this.name === 'origine') {
                     document.getElementById('autreCommuneDetail').classList.remove('show');
