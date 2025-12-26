@@ -196,7 +196,7 @@
             <p class="subtitle">رأيك مهم لتحسين الوصول إلى الملعب</p>
         </header>
         
-        <form id="enqueteForm" action="https://script.google.com/macros/s/AKfycbw9jGp-wf4TWX8IWcazIBrSyrIwElC9wR6sw8kOVwv_MZuITQFR7BNfLGHo-en89lcU/exec" method="POST">
+        <form id="enqueteForm">
             <!-- السؤال 1: العمر -->
             <div class="question-block">
                 <div class="question-title">
@@ -635,13 +635,44 @@
                 return;
             }
             
-            // إذا كنت تستخدم Formspree، سيتم إرسال النموذج بشكل طبيعي
-            // إذا كنت تستخدم خادمًا خلفيًا مخصصًا، قم بتعديل إجراء النموذج
-            alert('شكراً لك! تم إرسال استبيانك بنجاح.');
+      
         });
+		
         
         // تهيئة شريط التقدم
         document.addEventListener('DOMContentLoaded', updateProgressBar);
-    </script>
+		
+		
+		
+		
+document.getElementById("enqueteForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // ⛔ empêche l'envoi classique
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbw9jGp-wf4TWX8IWcazIBrSyrIwElC9wR6sw8kOVwv_MZuITQFR7BNfLGHo-en89lcU/exec", {
+        method: "POST",
+        body: data
+    })
+    .then(response => response.text())
+    .then(result => {
+        console.log("Succès :", result);
+
+        // ✅ REDIRECTION APRÈS ENVOI
+        window.location.href = "https://rachidprf.github.io/GSA/index.html"; 
+        // ou :
+        // window.location.href = "/";
+        // window.history.back();
+    })
+    .catch(error => {
+        alert("Erreur lors de l'envoi");
+        console.error(error);
+    });
+});
+
+
+		
+    </script>-
 </body>
 </html>
