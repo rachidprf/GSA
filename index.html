@@ -516,6 +516,20 @@
             
             <input type="hidden" name="_subject" value="رد جديد على استبيان أكادير الكبير">
             <input type="hidden" name="_format" value="plain">
+			
+			<div id="successMessage" style="
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    background:#e8f5e9;
+    color:#2e7d32;
+    border-radius:8px;
+    text-align:center;
+    font-size:16px;
+    font-weight:bold;
+">
+    ✅ شكراً! تم إرسال الاستبيان بنجاح.
+</div>
         </form>
         
         <div class="footer">
@@ -646,7 +660,7 @@
 		
 		
 document.getElementById("enqueteForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // ⛔ empêche l'envoi classique
+    e.preventDefault(); // empêche l'envoi classique
 
     const form = e.target;
     const data = new FormData(form);
@@ -657,16 +671,22 @@ document.getElementById("enqueteForm").addEventListener("submit", function (e) {
     })
     .then(response => response.text())
     .then(result => {
-        console.log("Succès :", result);
+        // ✅ Afficher message succès
+        document.getElementById("successMessage").style.display = "block";
 
-        // ✅ REDIRECTION APRÈS ENVOI
-        window.location.href = "https://rachidprf.github.io/GSA/index.html"; 
-        // ou :
-        // window.location.href = "/";
-        // window.history.back();
+        // ⬆️ Remonter vers le message
+        document.getElementById("successMessage").scrollIntoView({ behavior: "smooth" });
+
+        // 🔄 Optionnel : réinitialiser le formulaire
+        form.reset();
+
+        // 🔁 Optionnel : cacher le message après 5s
+        setTimeout(() => {
+            document.getElementById("successMessage").style.display = "none";
+        }, 5000);
     })
     .catch(error => {
-        alert("Erreur lors de l'envoi");
+        alert("❌ Erreur lors de l'envoi. Veuillez réessayer.");
         console.error(error);
     });
 });
