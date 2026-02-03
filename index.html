@@ -1,732 +1,1024 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استبيان - التنقل إلى ملعب أكادير الكبير</title>
+    <title>إجراء الدراسات الخاصة بخدمة السكك الحديدية لمدينة بني ملال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #1a5fb4;
+            --primary-dark: #0d4a9c;
+            --primary-light: #e3f2fd;
+            --secondary: #2e7d32;
+            --accent: #ff9800;
+            --danger: #e74c3c;
+            --light: #f8fafd;
+            --dark: #333;
+            --gray: #6c757d;
+            --border: #e0e0e0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', 'Cairo', sans-serif;
         }
+
         body {
-            background: #f0f5ff;
-            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.7;
+            min-height: 100vh;
             padding: 20px;
-            line-height: 1.8;
-            direction: rtl;
+            position: relative;
         }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f5f7fa"/><path d="M0 50 L50 0 L100 50 L50 100 Z" fill="%231a5fb4" opacity="0.03"/></svg>');
+            z-index: -1;
+        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             padding: 30px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        header {
-            text-align: center;
             margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #eaeaea;
+            text-align: center;
+            border-top: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
         }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--primary-light);
+            border-radius: 0 0 0 100px;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
         h1 {
-            color: #1a5fb4;
+            color: var(--primary);
             font-size: 28px;
             margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #666;
-            font-size: 16px;
-        }
-        .question-block {
-            margin-bottom: 25px;
-            padding: 20px;
-            background-color: #f8fafd;
-            border-radius: 10px;
-            border-right: 5px solid #1a5fb4;
-        }
-        .question-title {
-            font-size: 18px;
-            color: #1a5fb4;
-            margin-bottom: 15px;
-            font-weight: bold;
+            font-weight: 700;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
+
+        h1 i {
+            color: var(--accent);
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .progress-percentage {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            width: 0%;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Form */
+        #enqueteForm {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Question Block */
+        .question-block {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-right: 4px solid var(--primary);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .question-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         .question-number {
-            background-color: #1a5fb4;
+            background: var(--primary);
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 10px;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 16px;
+            margin-left: 15px;
+            flex-shrink: 0;
         }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            flex-grow: 1;
+        }
+
+        .required {
+            color: var(--danger);
+            margin-right: 5px;
+        }
+
+        /* Options */
         .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
+
         .option-row {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
-            padding: 5px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: var(--transition);
+            cursor: pointer;
         }
+
+        .option-row:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option-row.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 4px 8px rgba(26, 95, 180, 0.1);
+        }
+
         input[type="radio"], input[type="checkbox"] {
-            margin-left: 10px;
-            width: 18px;
-            height: 18px;
+            display: none;
         }
-        label {
+
+        .custom-radio, .custom-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gray);
+            border-radius: 50%;
+            margin-left: 15px;
+            position: relative;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .custom-checkbox {
+            border-radius: 6px;
+        }
+
+        input[type="radio"]:checked + .custom-radio,
+        input[type="checkbox"]:checked + .custom-checkbox {
+            border-color: var(--primary);
+            background-color: var(--primary);
+        }
+
+        input[type="radio"]:checked + .custom-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        input[type="checkbox"]:checked + .custom-checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .option-label {
             font-size: 16px;
+            color: var(--dark);
             cursor: pointer;
             flex-grow: 1;
+            user-select: none;
         }
+
+        /* Input Fields */
+        .input-group {
+            margin-top: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
         .text-input, .select-input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
             border-radius: 8px;
             font-size: 16px;
-            margin-top: 10px;
-            direction: rtl;
-            text-align: right;
+            transition: var(--transition);
+            background: white;
         }
-        .sub-question {
-            margin-right: 20px;
-            margin-top: 15px;
-            padding-right: 15px;
-            border-right: 2px dashed #bdc3c7;
+
+        .text-input:focus, .select-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1);
         }
-        .sub-question-title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
+
+        /* Conditional Sections */
         .conditional {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+            animation: slideDown 0.3s ease;
             display: none;
-            margin-top: 10px;
-            animation: fadeIn 0.3s ease;
         }
+
         .show {
             display: block;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Submit Button */
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light);
+        }
+
         .btn-submit {
-            background-color: #1a5fb4;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 16px 45px;
             font-size: 18px;
-            border-radius: 8px;
+            font-weight: 600;
+            border-radius: 10px;
             cursor: pointer;
-            display: block;
-            margin: 30px auto 0;
-            transition: background-color 0.3s;
-            font-weight: bold;
-        }
-        .btn-submit:hover {
-            background-color: #0d4a9c;
-        }
-        .footer {
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        .progress-container {
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            margin-bottom: 20px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 15px rgba(26, 95, 180, 0.3);
+            position: relative;
             overflow: hidden;
         }
-        .progress-bar {
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
             height: 100%;
-            background-color: #1a5fb4;
-            width: 0%;
-            transition: width 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
-        .required {
-            color: #e74c3c;
-            margin-right: 5px;
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 95, 180, 0.4);
         }
-        .note {
-            color: #666;
-            margin-bottom: 10px;
-            text-align: right;
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* Success Message */
+        #successMessage {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: var(--secondary);
+            border-radius: var(--radius);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            border-right: 5px solid var(--secondary);
+            animation: slideDown 0.5s ease;
+        }
+
+        #successMessage i {
+            font-size: 24px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: var(--gray);
             font-size: 14px;
+            padding: 20px;
+            line-height: 1.6;
         }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 20px 15px;
+                padding: 0 10px;
             }
+            
+            .header, #enqueteForm {
+                padding: 20px;
+            }
+            
             h1 {
                 font-size: 24px;
+                flex-direction: column;
+                gap: 10px;
             }
+            
             .question-block {
-                padding: 15px;
+                padding: 20px 15px;
             }
+            
+            .option-row {
+                padding: 12px;
+            }
+            
+            .btn-submit {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Validation Styles */
+        .validation-error {
+            border-color: var(--danger) !important;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+            color: var(--gray);
+            cursor: help;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            right: 50%;
+            transform: translateX(50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
     <div class="container">
-        <header>
-            <h1>استبيان - التنقل إلى ملعب أكادير الكبير</h1>
-            <p class="subtitle">رأيك مهم لتحسين الوصول إلى الملعب</p>
-        </header>
-        
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>
+                    <i class="fas fa-stadium"></i>
+                    إجراء الدراسات الخاصة بخدمة السكك الحديدية لمدينة بني ملال
+                </h1>
+                <p class="subtitle">رأيك مهم لتحسين وتطوير خدمات نقل السكك الحديدية لمدينة بني ملال مستقبلا </p>
+                <div class="tooltip">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="tooltip-text">رأيك مهم لتحسين وتطوير خدمات نقل السكك الحديدية لمدينة بني ملال مستقبلا</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <div class="progress-label">مستوى إكمال الاستبيان</div>
+                <div class="progress-percentage">0%</div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Form -->
         <form id="enqueteForm">
-            <!-- السؤال 1: العمر -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">1</span> العمر <span class="required">*</span>
+            <!-- Question 1: TYPE -->
+            <div class="question-block" id="q1">
+                <div class="question-header">
+                    <div class="question-number">1</div>
+                    <div class="question-title">
+                        <span class="required">*</span> نوع المركبة
+                    </div>
                 </div>
                 <div class="options">
                     <div class="option-row">
-                        <input type="radio" id="age1" name="age" value="أقل من 15 سنة" required>
-                        <label for="age1">أقل من 15 سنة</label>
+                        <input type="radio" id="type1" name="TYPE" value="VP" required>
+                        <div class="custom-radio"></div>
+                        <label for="type1" class="option-label">
+                            <i class="fas fa-car" style="color: var(--primary); margin-left: 8px;"></i>
+                            VP (سيارة خاصة)
+                        </label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="age2" name="age" value="15-29 سنة">
-                        <label for="age2">15–29 سنة</label>
+                        <input type="radio" id="type2" name="TYPE" value="VUL">
+                        <div class="custom-radio"></div>
+                        <label for="type2" class="option-label">
+                            <i class="fas fa-truck-pickup" style="color: var(--primary); margin-left: 8px;"></i>
+                            VUL (شاحنة خفيفة)
+                        </label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="age3" name="age" value="30-44 سنة">
-                        <label for="age3">30–44 سنة</label>
+                        <input type="radio" id="type3" name="TYPE" value="TAXI">
+                        <div class="custom-radio"></div>
+                        <label for="type3" class="option-label">
+                            <i class="fas fa-taxi" style="color: var(--accent); margin-left: 8px;"></i>
+                            TAXI (تاكسي)
+                        </label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="age4" name="age" value="45-59 سنة">
-                        <label for="age4">45–59 سنة</label>
+                        <input type="radio" id="type4" name="TYPE" value="PL1">
+                        <div class="custom-radio"></div>
+                        <label for="type4" class="option-label">
+                            <i class="fas fa-truck" style="color: var(--primary); margin-left: 8px;"></i>
+                            PETIT CAMION (شاحنة صغيرة)
+                        </label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="age5" name="age" value="60 سنة فما فوق">
-                        <label for="age5">60 سنة فما فوق</label>
+                        <input type="radio" id="type5" name="TYPE" value="PL2">
+                        <div class="custom-radio"></div>
+                        <label for="type5" class="option-label">
+                            <i class="fas fa-truck-moving" style="color: var(--primary); margin-left: 8px;"></i>
+                            GRAND CAMION (شاحنة كبيرة)
+                        </label>
+                    </div>
+                    <div class="option-row">
+                        <input type="radio" id="type6" name="TYPE" value="2ROUX">
+                        <div class="custom-radio"></div>
+                        <label for="type6" class="option-label">
+                            <i class="fas fa-motorcycle" style="color: var(--primary); margin-left: 8px;"></i>
+                            MOTO BYC (دراجة نارية)
+                        </label>
                     </div>
                 </div>
+                <div class="error-message" id="error-type">يرجى اختيار نوع المركبة</div>
             </div>
-            
-            <!-- السؤال 2: الجنس -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">2</span> الجنس <span class="required">*</span>
+
+            <!-- Question 2: ORIGINE & DESTINATION -->
+            <div class="question-block" id="q2">
+                <div class="question-header">
+                    <div class="question-number">2</div>
+                    <div class="question-title">
+                        <span class="required">*</span> معلومات الرحلة
+                    </div>
+                </div>
+				<div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-users" style="margin-left: 8px;"></i>
+                       عدد الركاب
+                    </label>
+                    <input type="number" class="text-input" id="OCP" name="NBOCCUP" placeholder="أدخل عدد الركاب..." required>
+                    <div class="error-message" id="error-origine">يرجى عدد الركاب</div>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-map-marker-alt" style="margin-left: 8px;"></i>
+                        مكان الإنطلاق
+                    </label>
+                    <input type="text" class="text-input" id="origine" name="ORIGINE" placeholder="أدخل مكان الانطلاق..." required>
+                    <div class="error-message" id="error-origine">يرجى تحديد مكان الانطلاق</div>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        <i class="fas fa-flag-checkered" style="margin-left: 8px;"></i>
+                        مكان الوصول
+                    </label>
+                    <input type="text" class="text-input" id="destination" name="DESTINATION" placeholder="أدخل مكان الوصول..." required>
+                    <div class="error-message" id="error-destination">يرجى تحديد مكان الوصول</div>
+                </div>
+            </div>
+
+            <!-- Question 3: MOTIF -->
+            <div class="question-block" id="q3">
+                <div class="question-header">
+                    <div class="question-number">3</div>
+                    <div class="question-title">
+                        <span class="required">*</span> الغرض من الرحلة
+                    </div>
                 </div>
                 <div class="options">
                     <div class="option-row">
-                        <input type="radio" id="sexe1" name="sexe" value="أنثى" required>
-                        <label for="sexe1">أنثى</label>
+                        <input type="radio" id="motif1" name="MOTIF" value="DOT" required>
+                        <div class="custom-radio"></div>
+                        <label for="motif1" class="option-label">
+                            <i class="fas fa-home" style="color: var(--primary); margin-left: 8px;"></i>
+                            من الخدمة للدار (العودة من العمل)
+                        </label>
                     </div>
                     <div class="option-row">
-                        <input type="radio" id="sexe2" name="sexe" value="ذكر">
-                        <label for="sexe2">ذكر</label>
+                        <input type="radio" id="motif2" name="MOTIF" value="PROF">
+                        <div class="custom-radio"></div>
+                        <label for="motif2" class="option-label">
+                            <i class="fas fa-briefcase" style="color: var(--primary); margin-left: 8px;"></i>
+                            مهني (عمل)
+                        </label>
+                    </div>
+                    <div class="option-row">
+                        <input type="radio" id="motif3" name="MOTIF" value="TOURISME">
+                        <div class="custom-radio"></div>
+                        <label for="motif3" class="option-label">
+                            <i class="fas fa-camera" style="color: var(--accent); margin-left: 8px;"></i>
+                            سياحة
+                        </label>
+                    </div>
+                    <div class="option-row">
+                        <input type="radio" id="motif4" name="MOTIF" value="AUTRE">
+                        <div class="custom-radio"></div>
+                        <label for="motif4" class="option-label">
+                            <i class="fas fa-ellipsis-h" style="color: var(--gray); margin-left: 8px;"></i>
+                            آخر
+                        </label>
                     </div>
                 </div>
+                <div class="error-message" id="error-motif">يرجى تحديد الغرض من الرحلة</div>
             </div>
-            
-            <!-- السؤال 3: نوع الملف الشخصي -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">3</span> نوع الملف الشخصي <span class="required">*</span>
+
+            <!-- Question 4: ESCALE -->
+            <div class="question-block" id="q4">
+                <div class="question-header">
+                    <div class="question-number">4</div>
+                    <div class="question-title">
+                        توقف في بني ملال
+                    </div>
                 </div>
                 <div class="options">
                     <div class="option-row">
-                        <input type="radio" id="profil1" name="profil" value="مقيم في أكادير الكبير" required>
-                        <label for="profil1">مقيم في أكادير الكبير</label>
+                        <input type="checkbox" id="escale" name="ESCALE" value="ESCALE">
+                        <div class="custom-checkbox"></div>
+                        <label for="escale" class="option-label">
+                            <i class="fas fa-map-pin" style="color: var(--primary); margin-left: 8px;"></i>
+                            نعم، هناك توقف في بني ملال
+                        </label>
                     </div>
-                    <div class="option-row">
-                        <input type="radio" id="profil2" name="profil" value="سائح وطني">
-                        <label for="profil2">سائح وطني</label>
+                </div>
+
+                <!-- Conditional Section for ESCALE Details -->
+                <div class="conditional" id="escaleDetail">
+                    <div class="question-title" style="font-size: 16px; margin-bottom: 15px;">
+                        <i class="fas fa-info-circle" style="color: var(--accent); margin-left: 8px;"></i>
+                        سبب التوقف في بني ملال
                     </div>
-                    <div class="option-row">
-                        <input type="radio" id="profil3" name="profil" value="سائح دولي">
-                        <label for="profil3">سائح دولي</label>
+                    <div class="options">
+                        <div class="option-row">
+                            <input type="radio" id="motifEscale1" name="MOTIFESCALE" value="PROF">
+                            <div class="custom-radio"></div>
+                            <label for="motifEscale1" class="option-label">توقف مهني (عمل)</label>
+                        </div>
+                        <div class="option-row">
+                            <input type="radio" id="motifEscale2" name="MOTIFESCALE" value="REPOS">
+                            <div class="custom-radio"></div>
+                            <label for="motifEscale2" class="option-label">توقف للاستراحة</label>
+                        </div>
+                        <div class="option-row">
+                            <input type="radio" id="motifEscale3" name="MOTIFESCALE" value="AUTRES">
+                            <div class="custom-radio"></div>
+                            <label for="motifEscale3" class="option-label">آخر</label>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- السؤال 4: مكان الانطلاق -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">4</span> مكان الانطلاق <span class="required">*</span>
-                </div>
-                <div class="options">
-                    <div class="option-row">
-                        <input type="radio" id="origine1" name="origine" value="جماعة أكادير" required>
-                        <label for="origine1">جماعة أكادير</label>
-                    </div>
-                    <div class="conditional" id="communeAgadirDetail">
-                        <input type="text" class="text-input" name="communeAgadirDetail" placeholder="يرجى تحديد الحي أو المنطقة/الفندق لغير المقيمين">
-                    </div>
-                    
-                    <div class="option-row">
-                        <input type="radio" id="origine2" name="origine" value="جماعة إنزكان">
-                        <label for="origine2">جماعة إنزكان</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine3" name="origine" value="جماعة أورير">
-                        <label for="origine3">جماعة أورير</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine4" name="origine" value="جماعة الدراركة">
-                        <label for="origine4">جماعة الدراركة</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine5" name="origine" value="جماعة آيت ملول">
-                        <label for="origine5">جماعة آيت ملول</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine6" name="origine" value="جماعة الدشيرة">
-                        <label for="origine6">جماعة الدشيرة</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine7" name="origine" value="جماعة القليعة">
-                        <label for="origine7">جماعة القليعة</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine8" name="origine" value="جماعة تغازوت">
-                        <label for="origine8">جماعة تغازوت</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="origine9" name="origine" value="جماعة/مدينة أخرى">
-                        <label for="origine9">جماعة/مدينة أخرى : يرجى التحديد</label>
-                    </div>
-                    <div class="conditional" id="autreCommuneDetail">
-                        <input type="text" class="text-input" name="autreCommuneDetail" placeholder="يرجى تحديد الجماعة أو المدينة">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- السؤال 5: وسيلة النقل -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">5</span> وسيلة (وسائل) النقل المستخدمة للوصول إلى الملعب <span class="required">*</span>
-                </div>
-                <p class="note">(في حالة التنقل متعدد الوسائط، يجب تحديد عدة وسائل)</p>
+
+            <!-- Submit Section -->
+            <div class="submit-section">
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i>
+                    إرسال الاستبيان
+                </button>
                 
-                <div class="options">
-                    <div class="option-row">
-                        <input type="checkbox" id="mode1" name="mode" value="سيراً على الأقدام">
-                        <label for="mode1">سيراً على الأقدام</label>
-                    </div>
-                    
-                    <div class="sub-question" id="piedDetail">
-                        <div class="sub-question-title">طوال الرحلة</div>
-                        <div class="option-row">
-                            <input type="radio" id="pied1" name="pied_type" value="كامل الرحلة سيراً على الأقدام">
-                            <label for="pied1">كامل الرحلة سيراً على الأقدام</label>
-                        </div>
-                        <div class="option-row">
-                            <input type="radio" id="pied2" name="pied_type" value="مشي على الأقدام مدمج مع وسائل أخرى">
-                            <label for="pied2">مشي على الأقدام مدمج مع وسائل أخرى</label>
-                        </div>
-                    </div>
-                    
-                    <div class="option-row">
-                        <input type="checkbox" id="mode2" name="mode" value="دراجة نارية">
-                        <label for="mode2">دراجة نارية</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="checkbox" id="mode3" name="mode" value="دراجة هوائية">
-                        <label for="mode3">دراجة هوائية</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="checkbox" id="mode4" name="mode" value="تروتينيط">
-                        <label for="mode4">تروتينيط</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="checkbox" id="mode5" name="mode" value="حافلة">
-                        <label for="mode5">حافلة</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="checkbox" id="mode6" name="mode" value="تاكسي صغير">
-                        <label for="mode6">تاكسي صغير</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="checkbox" id="mode7" name="mode" value="تاكسي كبير">
-                        <label for="mode7">تاكسي كبير</label>
-                    </div>
-                    
-                    <div class="option-row">
-                        <input type="checkbox" id="mode8" name="mode" value="نقل مكوكي CAN">
-                        <label for="mode8">نقل النافيط ديال الكان (يرجى تحديد نوع النقل المكوكي)</label>
-                    </div>
-                    
-                    <div class="conditional" id="navetteDetail">
-                        <div class="sub-question">
-                            <div class="sub-question-title"> النقل النافيط ديال الكان</div>
-                            <div class="option-row">
-                                <input type="radio" id="navette1" name="navette_type" value="تغازوت">
-                                <label for="navette1">تغازوت</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" id="navette2" name="navette_type" value="وادي الطيور">
-                                <label for="navette2">وادي الطيور</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" id="navette3" name="navette_type" value="المطار">
-                                <label for="navette3">المطار</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" id="navette4" name="navette_type" value="إنزكان">
-                                <label for="navette4">إنزكان</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="radio" id="navette5" name="navette_type" value="آخر">
-                                <label for="navette5">آخر : يرجى التحديد</label>
-                            </div>
-                            <div class="conditional" id="autreNavetteDetail">
-                                <input type="text" class="text-input" name="autreNavetteDetail" placeholder="يرجى تحديد مكان النقل النافيط ديال الكان">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="option-row">
-                        <input type="checkbox" id="mode9" name="mode" value="سيارة">
-                        <label for="mode9">سيارة</label>
-                    </div>
-                    
-                    <div class="conditional" id="voitureDetail">
-                        <div class="sub-question">
-                            <div class="sub-question-title">تفاصيل السيارة</div>
-                            <div style="margin-bottom: 15px;">
-                                <label for="nbPersonnes">عدد الأشخاص في السيارة :</label>
-                                <input type="number" id="nbPersonnes" name="nbPersonnes" min="1" max="20" class="text-input" style="width: 100px; margin-right: 10px; text-align: center;">
-                            </div>
-                            
-                            <div class="sub-question-title">مكان الوقوف :</div>
-                            
-                            <div style="margin-bottom: 15px;">
-                                <strong>داخل منطقة الملعب (بين الطريق السريع والطريق الدائري الشمالي الشرقي)</strong>
-                                
-                                <div class="option-row">
-                                    <input type="radio" id="park2" name="parking" value="مواقف السيارات/الدراجات بالقرب من موقف النقل المكوكي">
-                                    <label for="park2">مواقف السيارات/الدراجات بالقرب من موقف النقل المكوكي</label>
-                                </div>
-                                <div class="option-row">
-                                    <input type="radio" id="park3" name="parking" value="موقف قصر المؤتمرات">
-                                    <label for="park3">موقف قصر المؤتمرات</label>
-                                </div>
-                                <div class="option-row">
-                                    <input type="radio" id="park4" name="parking" value="موقف غير مهيأ خلف موقف الحافلات">
-                                    <label for="park4">موقف غير مهيأ خلف موقف الحافلات</label>
-                                </div>
-                                
-                                <div style="margin-right: 15px;">
-                                    <div class="sub-question-title">على الطريق :</div>
-									
-									<div class="option-row">
-                                        <input type="radio" id="voirie1" name="voirie" value="توقف مؤقت">
-                                        <label for="voirie1">توقف مؤقت</label>
-                                    </div>
-									
-                                    <div class="option-row">
-                                        <input type="radio" id="voirie1" name="voirie" value="مدخل تارودانت">
-                                        <label for="voirie1">مدخل تارودانت</label>
-                                    </div>
-                                    <div class="option-row">
-                                        <input type="radio" id="voirie2" name="voirie" value="مدخل سوس">
-                                        <label for="voirie2">مدخل سوس</label>
-                                    </div>
-                                    <div class="option-row">
-                                        <input type="radio" id="voirie3" name="voirie" value="مدخل المحيط">
-                                        <label for="voirie3">مدخل المحيط</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <strong>خارج منطقة الملعب :</strong>
-                                <div class="option-row">
-                                    <input type="radio" id="park5" name="parking" value="خارج منطقة الملعب">
-                                    <label for="park5">يرجى تحديد الشارع أو الموقع :</label>
-                                </div>
-                                <div class="conditional" id="exterieurDetail">
-                                    <input type="text" class="text-input" name="exterieurDetail" placeholder="اسم الشارع أو الموقع">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    ✅ شكراً! تم إرسال الاستبيان بنجاح.
                 </div>
             </div>
-            
-            <!-- السؤال 6: الصعوبات -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">6</span> هل واجهت أي صعوبات؟ <span class="required">*</span>
-                </div>
-                <div class="options">
-                    <div class="option-row">
-                        <input type="radio" id="difficulte1" name="difficulte" value="لا" required>
-                        <label for="difficulte1">لا</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio" id="difficulte2" name="difficulte" value="نعم">
-                        <label for="difficulte2">نعم → ما هي؟</label>
-                    </div>
-                    
-                    <div class="conditional" id="difficultesDetail">
-                        <div class="sub-question">
-                            <div class="sub-question-title">أنواع الصعوبات التي واجهتها :</div>
-                            <div class="option-row">
-                                <input type="checkbox" id="diff1" name="difficultes_type" value="ازدحام مروري">
-                                <label for="diff1">ازدحام مروري</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="checkbox" id="diff2" name="difficultes_type" value="صعوبة في الوقوف">
-                                <label for="diff2">صعوبة في الوقوف</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="checkbox" id="diff3" name="difficultes_type" value="اكتظاظ في النقل العام">
-                                <label for="diff3">اكتظاظ في النقل العام</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="checkbox" id="diff4" name="difficultes_type" value="إشارات غير كافية">
-                                <label for="diff4">إشارات غير كافية</label>
-                            </div>
-                            <div class="option-row">
-                                <input type="checkbox" id="diff5" name="difficultes_type" value="آخر">
-                                <label for="diff5">آخر :</label>
-                            </div>
-                            <div class="conditional" id="autreDifficulteDetail">
-                                <input type="text" class="text-input" name="autreDifficulteDetail" placeholder="يرجى تحديد الصعوبة">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-		   
-		  <!-- السؤال 7: نوع الملف الشخصي -->
-            <div class="question-block">
-                <div class="question-title">
-                    <span class="question-number">7</span> مدة الرحلة كاملة حتى وصلتي <span class="required">*</span>
-                </div>
-                <div class="options">
-                    <div class="option-row">
-                        <input type="radio"  name="TEMPS" value="اقل من 10 دقائق " required>
-                        <label for="profil1">اقل من 10 دقائق </label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio"  name="TEMPS" value="بين 11 و20 دقيقة">
-                        <label for="profil2">بين 10 و20 دقيقة</label>
-                    </div>
-                    <div class="option-row">
-                        <input type="radio"  name="TEMPS" value="بين 21 و 40 دقيقه ">
-                        <label for="profil3">بين 20 و 40 دقيقه </label>
-                    </div>
-					<div class="option-row">
-                        <input type="radio"  name="TEMPS" value="بين 41 و 60 دقيقة ">
-                        <label for="profil3">بين 40 و 60 دقيقة </label>
-                    </div>
-					<div class="option-row">
-                        <input type="radio"  name="TEMPS" value="اكثر من 60 دقيقة ">
-                        <label for="profil3">اكثر من 60 دقيقة </label>
-                    </div>
-                </div>
-            </div> 
-		   
-		    
-            <button type="submit" class="btn-submit">إرسال الاستبيان</button>
-            
+
             <input type="hidden" name="_subject" value="رد جديد على استبيان أكادير الكبير">
             <input type="hidden" name="_format" value="plain">
-			
-			<div id="successMessage" style="
-    display:none;
-    margin-top:20px;
-    padding:15px;
-    background:#e8f5e9;
-    color:#2e7d32;
-    border-radius:8px;
-    text-align:center;
-    font-size:16px;
-    font-weight:bold;
-">
-    ✅ شكراً! تم إرسال الاستبيان بنجاح.
-</div>
         </form>
-        
+
+        <!-- Footer -->
         <div class="footer">
-            <p>شكراً للمشاركة في هذا الاستبيان. ستساعدنا ردودك على تحسين إمكانية الوصول إلى ملعب أكادير الكبير.</p>
-            <p>© 2025 - استبيان النقل لأكادير الكبير</p>
+            <p>شكراً لمشاركتك القيمة في هذا الاستبيان. ستساعدنا آراؤكم على تطوير وتحسين خدمات النقل.</p>
+            <p style="margin-top: 10px;">
+                <i class="fas fa-shield-alt" style="color: var(--primary); margin-left: 5px;"></i>
+                نحن نحترم خصوصيتك - جميع البيانات مجهولة الهوية
+            </p>
+            <p style="margin-top: 20px; color: var(--gray); font-size: 13px;">
+                © 2026 - CID / RSTD - جميع الحقوق محفوظة
+            </p>
         </div>
     </div>
 
     <script>
-        // إدارة الحقول الشرطية
-        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
-            input.addEventListener('change', function() {
-                // مكان الانطلاق
-                if (this.name === 'origine' && this.value === 'جماعة أكادير') {
-                    document.getElementById('communeAgadirDetail').classList.add('show');
-                } else if (this.name === 'origine') {
-                    document.getElementById('communeAgadirDetail').classList.remove('show');
-                }
-                
-                if (this.name === 'origine' && this.value === 'جماعة/مدينة أخرى') {
-                    document.getElementById('autreCommuneDetail').classList.add('show');
-                } else if (this.name === 'origine') {
-                    document.getElementById('autreCommuneDetail').classList.remove('show');
-                }
-                
-                // وسيلة النقل
-                if (this.id === 'mode1') {
-                    document.getElementById('piedDetail').classList.toggle('show', this.checked);
-                }
-                
-                if (this.id === 'mode8') {
-                    document.getElementById('navetteDetail').classList.toggle('show', this.checked);
-                }
-                
-                if (this.id === 'mode9') {
-                    document.getElementById('voitureDetail').classList.toggle('show', this.checked);
-                }
-                
-                // النقل المكوكي CAN
-                if (this.name === 'navette_type' && this.value === 'آخر') {
-                    document.getElementById('autreNavetteDetail').classList.add('show');
-                } else if (this.name === 'navette_type') {
-                    document.getElementById('autreNavetteDetail').classList.remove('show');
-                }
-                
-                // الوقوف خارج الملعب
-                if (this.id === 'park5') {
-                    document.getElementById('exterieurDetail').classList.toggle('show', this.checked);
-                } else if (this.name === 'parking' && this.id !== 'park5') {
-                    document.getElementById('exterieurDetail').classList.remove('show');
-                }
-                
-                // الصعوبات
-                if (this.name === 'difficulte' && this.value === 'نعم') {
-                    document.getElementById('difficultesDetail').classList.add('show');
-                } else if (this.name === 'difficulte') {
-                    document.getElementById('difficultesDetail').classList.remove('show');
-                    document.getElementById('autreDifficulteDetail').classList.remove('show');
-                }
-                
-                // صعوبة أخرى
-                if (this.id === 'diff5') {
-                    document.getElementById('autreDifficulteDetail').classList.toggle('show', this.checked);
-                }
-                
-                updateProgressBar();
-            });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressBar();
+            setupEventListeners();
         });
-        
-        // شريط التقدم
+
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Radio and checkbox selection with visual feedback
+            document.querySelectorAll('.option-row').forEach(row => {
+                const input = row.querySelector('input');
+                row.addEventListener('click', function(e) {
+                    if (input.type === 'radio') {
+                        // Unselect all options in the same group
+                        document.querySelectorAll(`input[name="${input.name}"]`).forEach(radio => {
+                            radio.closest('.option-row').classList.remove('selected');
+                        });
+                    }
+                    
+                    if (input.type === 'checkbox') {
+                        input.checked = !input.checked;
+                    } else {
+                        input.checked = true;
+                    }
+                    
+                    // Toggle selected class
+                    row.classList.toggle('selected', input.checked);
+                    
+                    // Handle conditional sections
+                    handleConditionalSections(input);
+                    updateProgressBar();
+                    clearError(input);
+                });
+            });
+
+            // Text input validation
+            document.querySelectorAll('.text-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    updateProgressBar();
+                    clearError(this);
+                });
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+            });
+
+            // Form submission
+            document.getElementById('enqueteForm').addEventListener('submit', handleSubmit);
+        }
+
+        // Handle conditional sections display
+        function handleConditionalSections(input) {
+            // ESCALE detail
+            if (input.id === 'escale') {
+                const detailSection = document.getElementById('escaleDetail');
+                if (input.checked) {
+                    detailSection.classList.add('show');
+                } else {
+                    detailSection.classList.remove('show');
+                    // Clear related inputs
+                    detailSection.querySelectorAll('input').forEach(inp => {
+                        inp.checked = false;
+                        inp.closest('.option-row')?.classList.remove('selected');
+                    });
+                }
+            }
+        }
+
+        // Update progress bar
         function updateProgressBar() {
             const questions = document.querySelectorAll('.question-block');
             let answered = 0;
-            
+            let totalRequired = 0;
+
             questions.forEach(question => {
-                const inputs = question.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked, input[type="text"]:not([value=""]), input[type="number"]:not([value=""])');
-                const required = question.querySelector('.required');
+                const requiredInputs = question.querySelectorAll('input[required], .text-input[required]');
+                totalRequired += requiredInputs.length;
                 
-                if (required && inputs.length > 0) {
+                let questionAnswered = true;
+                
+                requiredInputs.forEach(input => {
+                    if (input.type === 'radio' || input.type === 'checkbox') {
+                        const name = input.name;
+                        const checked = document.querySelector(`input[name="${name}"]:checked`);
+                        if (!checked) questionAnswered = false;
+                    } else if (input.type === 'text') {
+                        if (!input.value.trim()) questionAnswered = false;
+                    }
+                });
+
+                if (questionAnswered && requiredInputs.length > 0) {
                     answered++;
                 }
             });
-            
-            const progress = (answered / questions.length) * 100;
+
+            const progress = totalRequired > 0 ? (answered / questions.length) * 100 : 0;
             document.getElementById('progressBar').style.width = `${progress}%`;
+            document.querySelector('.progress-percentage').textContent = `${Math.round(progress)}%`;
         }
-        
-        // مستمعو الإدخال للحقول النصية/الرقمية
-        document.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => {
-            input.addEventListener('input', updateProgressBar);
-        });
-        
-        // التحقق قبل الإرسال
-        document.getElementById('enqueteForm').addEventListener('submit', function(e) {
-            // التحقق الأساسي - التأكد من أن الأسئلة الإلزامية مملوءة
-            const requiredRadios = document.querySelectorAll('input[type="radio"][required]');
-            let allRequiredFilled = true;
+
+        // Field validation
+        function validateField(field) {
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                showError(field, 'هذا الحقل مطلوب');
+                return false;
+            }
+            return true;
+        }
+
+        // Show error message
+        function showError(field, message) {
+            field.classList.add('validation-error');
+            const errorId = `error-${field.id || field.name}`;
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+
+        // Clear error
+        function clearError(field) {
+            field.classList.remove('validation-error');
+            const errorId = `error-${field.id || field.name}`;
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }
+
+        // Handle form submission
+        function handleSubmit(e) {
+            e.preventDefault();
             
-            requiredRadios.forEach(radio => {
-                const name = radio.name;
-                const checkedInGroup = document.querySelector(`input[name="${name}"]:checked`);
-                if (!checkedInGroup) {
-                    allRequiredFilled = false;
-                    const questionBlock = radio.closest('.question-block');
-                    questionBlock.style.borderRightColor = '#e74c3c';
-                    
-                    // إعادة اللون بعد فترة
-                    setTimeout(() => {
-                        questionBlock.style.borderRightColor = '#1a5fb4';
-                    }, 3000);
+            let isValid = true;
+            
+            // Validate all required fields
+            document.querySelectorAll('input[required]').forEach(input => {
+                if (input.type === 'radio') {
+                    const name = input.name;
+                    const checked = document.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) {
+                        isValid = false;
+                        showError(document.querySelector(`input[name="${name}"]`).closest('.question-block'), 'يرجى اختيار خيار');
+                    }
+                } else if (input.type === 'text' && !input.value.trim()) {
+                    isValid = false;
+                    showError(input, 'هذا الحقل مطلوب');
                 }
             });
-            
-            if (!allRequiredFilled) {
-                e.preventDefault();
-                alert('يرجى الإجابة على جميع الأسئلة الإلزامية (المشار إليها بـ *).');
+
+            if (!isValid) {
+                // Scroll to first error
+                const firstError = document.querySelector('.validation-error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
-            
-      
+
+            // Prepare form data
+            const form = e.target;
+            const data = new FormData(form);
+
+            // Show loading state
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            submitBtn.disabled = true;
+
+            // Send data to Google Apps Script
+            fetch("https://script.google.com/macros/s/AKfycbw9jGp-wf4TWX8IWcazIBrSyrIwElC9wR6sw8kOVwv_MZuITQFR7BNfLGHo-en89lcU/exec", {
+                method: "POST",
+                body: data
+            })
+            .then(response => response.text())
+            .then(result => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset form after 2 seconds
+                setTimeout(() => {
+                    form.reset();
+                    document.querySelectorAll('.option-row.selected').forEach(row => {
+                        row.classList.remove('selected');
+                    });
+                    document.querySelectorAll('.conditional').forEach(section => {
+                        section.classList.remove('show');
+                    });
+                    updateProgressBar();
+                }, 2000);
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+            })
+            .catch(error => {
+                alert('❌ حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        }
+
+        // Auto-save form data (optional)
+        function autoSave() {
+            const formData = {};
+            document.querySelectorAll('#enqueteForm input, #enqueteForm select').forEach(input => {
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    if (input.checked) formData[input.name] = input.value;
+                } else if (input.value) {
+                    formData[input.name] = input.value;
+                }
+            });
+            localStorage.setItem('enqueteFormData', JSON.stringify(formData));
+        }
+
+        // Load auto-saved data
+        function loadAutoSavedData() {
+            const savedData = localStorage.getItem('enqueteFormData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                Object.keys(formData).forEach(key => {
+                    const input = document.querySelector(`[name="${key}"][value="${formData[key]}"]`);
+                    if (input) {
+                        input.checked = true;
+                        input.closest('.option-row')?.classList.add('selected');
+                        handleConditionalSections(input);
+                    } else {
+                        const textInput = document.querySelector(`[name="${key}"]`);
+                        if (textInput && textInput.type === 'text') {
+                            textInput.value = formData[key];
+                        }
+                    }
+                });
+                updateProgressBar();
+            }
+        }
+
+        // Auto-save on change
+        document.querySelectorAll('#enqueteForm input').forEach(input => {
+            input.addEventListener('change', autoSave);
         });
-		
-        
-        // تهيئة شريط التقدم
-        document.addEventListener('DOMContentLoaded', updateProgressBar);
-		
-		
-		
-		
-document.getElementById("enqueteForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // empêche l'envoi classique
 
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbw9jGp-wf4TWX8IWcazIBrSyrIwElC9wR6sw8kOVwv_MZuITQFR7BNfLGHo-en89lcU/exec", {
-        method: "POST",
-        body: data
-    })
-    .then(response => response.text())
-    .then(result => {
-        // ✅ Afficher message succès
-        document.getElementById("successMessage").style.display = "block";
-
-        // ⬆️ Remonter vers le message
-        document.getElementById("successMessage").scrollIntoView({ behavior: "smooth" });
-
-        // 🔄 Optionnel : réinitialiser le formulaire
-        form.reset();
-
-        // 🔁 Optionnel : cacher le message après 5s
-        setTimeout(() => {
-            document.getElementById("successMessage").style.display = "none";
-        }, 5000);
-    })
-    .catch(error => {
-        alert("❌ Erreur lors de l'envoi. Veuillez réessayer.");
-        console.error(error);
-    });
-});
-
-
-		
-    </script>-
+        // Load saved data on page load
+        loadAutoSavedData();
+    </script>
 </body>
 </html>
