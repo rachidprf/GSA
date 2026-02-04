@@ -552,10 +552,49 @@
 
         <!-- Form -->
         <form id="enqueteForm">
+		
+		  <div class="question-block" id="q1">
+                <div class="question-header">
+                    <div class="question-number">1</div>
+                    <div class="question-title">
+                        <span class="required">*</span> مكان واتجاه الاستبيان
+                    </div>
+                </div>
+                <div class="input-group">
+        
+    <div class="select-container">
+        <select class="select-input" id="poste" name="POSTE" required>
+            <option value="" disabled selected>-- اختر مكان الاستبيان --</option>
+            <option value="P1">POSTE 1</option>
+            <option value="P2">POSTE 2</option>
+            <option value="P3">POSTE 3</option>
+            <option value="P4">POSTE 4</option>
+        </select>
+        
+    </div>
+	<div class="select-container">
+        <select class="select-input" id="poste" name="SENS" required>
+            <option value="" disabled selected>-- اختر الاتجاه --</option>
+            <option value="SENS 1">SENS 1</option>
+            <option value="SENS 2">SENS 2</option>
+           
+        </select>
+        
+    </div>
+    
+    <div class="error-message" id="error-poste">يرجى اختيار مكان الاستبيان</div>
+</div>
+                    
+ </div>                                
+		
+		
+		
+		
+		
             <!-- Question 1: TYPE -->
             <div class="question-block" id="q1">
                 <div class="question-header">
-                    <div class="question-number">1</div>
+                    <div class="question-number">2</div>
                     <div class="question-title">
                         <span class="required">*</span> نوع المركبة
                     </div>
@@ -616,7 +655,7 @@
             <!-- Question 2: ORIGINE & DESTINATION -->
             <div class="question-block" id="q2">
                 <div class="question-header">
-                    <div class="question-number">2</div>
+                    <div class="question-number">3</div>
                     <div class="question-title">
                         <span class="required">*</span> معلومات الرحلة
                     </div>
@@ -650,7 +689,7 @@
             <!-- Question 3: MOTIF -->
             <div class="question-block" id="q3">
                 <div class="question-header">
-                    <div class="question-number">3</div>
+                    <div class="question-number">4</div>
                     <div class="question-title">
                         <span class="required">*</span> الغرض من الرحلة
                     </div>
@@ -695,14 +734,14 @@
             <!-- Question 4: ESCALE -->
             <div class="question-block" id="q4">
                 <div class="question-header">
-                    <div class="question-number">4</div>
+                    <div class="question-number">5</div>
                     <div class="question-title">
                         توقف في بني ملال
                     </div>
                 </div>
                 <div class="options">
                     <div class="option-row">
-                        <input type="checkbox" id="escale" name="ESCALE" value="ESCALE">
+                        <input type="checkbox" id="escale" name="ESCALE" value="Oui">
                         <div class="custom-checkbox"></div>
                         <label for="escale" class="option-label">
                             <i class="fas fa-map-pin" style="color: var(--primary); margin-left: 8px;"></i>
