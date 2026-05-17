@@ -151,9 +151,8 @@
             </div>
             <div class="error-message" id="error-frequence">يرجى تحديد تكرار التنقل</div></div>
 
-        
-        <!-- 11 Heure automatique -->
-        <div class="question-block"><div class="question-header"><div class="question-number">11</div><div class="question-title">الوقت والتاريخ (تسجيل تلقائي)</div></div>
+        <!-- 10 Heure automatique -->
+        <div class="question-block"><div class="question-header"><div class="question-number">10</div><div class="question-title">الوقت والتاريخ (تسجيل تلقائي)</div></div>
             <div class="time-display"><i class="fas fa-clock"></i><span id="currentTime">--:--:--</span></div>
             <input type="hidden" id="heureAuto" name="HEURE"><input type="hidden" id="dateAuto" name="DATE"></div>
 
@@ -179,14 +178,20 @@
         const day = now.getDate().toString().padStart(2, '0');
         const month = (now.getMonth() + 1).toString().padStart(2, '0');
         const year = now.getFullYear();
-        document.getElementById('currentTime').innerText = `${hours}:${minutes}:${seconds} - ${day}/${month}/${year}`;
-        document.getElementById('heureAuto').value = `${hours}:${minutes}:${seconds}`;
-        document.getElementById('dateAuto').value = `${day}/${month}/${year}`;
+        const timeElement = document.getElementById('currentTime');
+        if (timeElement) {
+            timeElement.innerText = `${hours}:${minutes}:${seconds} - ${day}/${month}/${year}`;
+        }
+        const heureAuto = document.getElementById('heureAuto');
+        const dateAuto = document.getElementById('dateAuto');
+        if (heureAuto) heureAuto.value = `${hours}:${minutes}:${seconds}`;
+        if (dateAuto) dateAuto.value = `${day}/${month}/${year}`;
     }
     
     function setupEventListeners() {
         document.querySelectorAll('.option-row').forEach(row => {
             const input = row.querySelector('input');
+            if (!input) return;
             row.addEventListener('click', function() {
                 if (input.type === 'radio') {
                     document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => {
@@ -218,24 +223,28 @@
         if (fieldName === 'VENIR_DE') {
             const div = document.getElementById('autreVenirDiv');
             const input = document.getElementById('autreVenirTexte');
-            if (isAutre) {
-                div.classList.add('show');
-                input.setAttribute('required', 'required');
-            } else {
-                div.classList.remove('show');
-                input.removeAttribute('required');
-                input.value = '';
+            if (div && input) {
+                if (isAutre) {
+                    div.classList.add('show');
+                    input.setAttribute('required', 'required');
+                } else {
+                    div.classList.remove('show');
+                    input.removeAttribute('required');
+                    input.value = '';
+                }
             }
         } else if (fieldName === 'ALLER_A') {
             const div = document.getElementById('autreAllerDiv');
             const input = document.getElementById('autreAllerTexte');
-            if (isAutre) {
-                div.classList.add('show');
-                input.setAttribute('required', 'required');
-            } else {
-                div.classList.remove('show');
-                input.removeAttribute('required');
-                input.value = '';
+            if (div && input) {
+                if (isAutre) {
+                    div.classList.add('show');
+                    input.setAttribute('required', 'required');
+                } else {
+                    div.classList.remove('show');
+                    input.removeAttribute('required');
+                    input.value = '';
+                }
             }
         }
         updateProgressBar();
@@ -244,27 +253,32 @@
     function updateProgressBar() {
         let total = 0, answered = 0;
         const fields = [
-            { elem: document.getElementById('enqueteur'), cond: e => e.value.trim() !== '' },
-            { elem: document.getElementById('poste'), cond: e => e.value && e.value !== '' },
-            { elem: document.getElementById('sens'), cond: e => e.value && e.value !== '' },
+            { elem: document.getElementById('enqueteur'), cond: e => e && e.value.trim() !== '' },
+            { elem: document.getElementById('poste'), cond: e => e && e.value && e.value !== '' },
+            { elem: document.getElementById('sens'), cond: e => e && e.value && e.value !== '' },
             { elem: document.querySelector('input[name="TYPE_VEHICULE"]:checked'), cond: e => e !== null },
             { elem: document.querySelector('input[name="GENRE"]:checked'), cond: e => e !== null },
-            { elem: document.getElementById('lieuResidence'), cond: e => e.value.trim() !== '' },
-            { elem: document.getElementById('nbOccup'), cond: e => e.value.trim() !== '' },
-            { elem: document.getElementById('origine'), cond: e => e.value.trim() !== '' },
-            { elem: document.getElementById('destination'), cond: e => e.value.trim() !== '' },
+            { elem: document.getElementById('lieuResidence'), cond: e => e && e.value.trim() !== '' },
+            { elem: document.getElementById('nbOccup'), cond: e => e && e.value.trim() !== '' },
+            { elem: document.getElementById('origine'), cond: e => e && e.value.trim() !== '' },
+            { elem: document.getElementById('destination'), cond: e => e && e.value.trim() !== '' },
             { elem: document.querySelector('input[name="VENIR_DE"]:checked'), cond: e => e !== null },
             { elem: document.querySelector('input[name="ALLER_A"]:checked'), cond: e => e !== null },
-            { elem: document.querySelector('input[name="FREQUENCE"]:checked'), cond: e => e !== null },
-            { elem: document.getElementById('tempsParcours'), cond: e => e.value.trim() !== '' }
+            { elem: document.querySelector('input[name="FREQUENCE"]:checked'), cond: e => e !== null }
         ];
-        fields.forEach(f => { total++; if (f.cond(f.elem)) answered++; });
-        let progress = (answered / total) * 100;
-        document.getElementById('progressBar').style.width = `${progress}%`;
-        document.querySelector('.progress-percentage').innerText = `${Math.round(progress)}%`;
+        fields.forEach(f => { 
+            total++; 
+            if (f.cond(f.elem)) answered++; 
+        });
+        let progress = total > 0 ? (answered / total) * 100 : 0;
+        const progressBar = document.getElementById('progressBar');
+        const percentageSpan = document.querySelector('.progress-percentage');
+        if (progressBar) progressBar.style.width = `${progress}%`;
+        if (percentageSpan) percentageSpan.innerText = `${Math.round(progress)}%`;
     }
     
     function clearError(input) {
+        if (!input) return;
         input.classList.remove('validation-error');
         let errId = input.id ? `error-${input.id}` : null;
         if (!errId && input.name) errId = `error-${input.name.toLowerCase()}`;
@@ -272,6 +286,7 @@
     }
     
     function showError(input, msg) {
+        if (!input) return;
         input.classList.add('validation-error');
         let errId = input.id ? `error-${input.id}` : null;
         if (!errId && input.name) errId = `error-${input.name.toLowerCase()}`;
@@ -321,8 +336,19 @@
             method: "POST", body: data
         }).then(() => {
             document.getElementById('successMessage').style.display = 'block';
-            setTimeout(() => { form.reset(); document.querySelectorAll('.option-row.selected').forEach(r => r.classList.remove('selected')); document.getElementById('autreVenirDiv').classList.remove('show'); document.getElementById('autreAllerDiv').classList.remove('show'); updateProgressBar(); updateCurrentTime(); localStorage.removeItem('enqueteFormData'); }, 2000);
-            setTimeout(() => { document.getElementById('successMessage').style.display = 'none'; }, 5000);
+            setTimeout(() => { 
+                form.reset(); 
+                document.querySelectorAll('.option-row.selected').forEach(r => r.classList.remove('selected')); 
+                document.getElementById('autreVenirDiv')?.classList.remove('show'); 
+                document.getElementById('autreAllerDiv')?.classList.remove('show'); 
+                updateProgressBar(); 
+                updateCurrentTime(); 
+                localStorage.removeItem('enqueteFormData'); 
+            }, 2000);
+            setTimeout(() => { 
+                const msg = document.getElementById('successMessage');
+                if (msg) msg.style.display = 'none'; 
+            }, 5000);
         }).catch(err => { alert('❌ حدث خطأ أثناء الإرسال'); console.error(err); })
         .finally(() => { btn.innerHTML = original; btn.disabled = false; });
     }
