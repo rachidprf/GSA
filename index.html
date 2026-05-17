@@ -41,23 +41,24 @@
         .question-title { font-size: 18px; font-weight: 600; color: var(--primary); }
         .required { color: var(--danger); margin-right: 5px; }
         .options { display: flex; flex-direction: column; gap: 12px; }
-        .option-row { display: flex; align-items: center; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e0e0e0; cursor: pointer; }
-        .option-row:hover { border-color: var(--primary); background: var(--primary-light); }
-        .option-row.selected { border-color: var(--primary); background: var(--primary-light); }
+        .option-row { display: flex; align-items: center; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e0e0e0; cursor: pointer; transition: var(--transition); }
+        .option-row:hover { border-color: var(--primary); background: var(--primary-light); transform: translateX(-3px); }
+        .option-row.selected { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 4px 12px rgba(26,95,180,0.15); }
         input[type="radio"] { display: none; }
-        .custom-radio { width: 22px; height: 22px; border: 2px solid var(--gray); border-radius: 50%; margin-left: 15px; position: relative; flex-shrink: 0; }
+        .custom-radio { width: 22px; height: 22px; border: 2px solid var(--gray); border-radius: 50%; margin-left: 15px; position: relative; flex-shrink: 0; transition: var(--transition); }
         input[type="radio"]:checked + .custom-radio { border-color: var(--primary); background-color: var(--primary); }
         input[type="radio"]:checked + .custom-radio::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: white; border-radius: 50%; }
-        .option-label { font-size: 16px; color: var(--dark); cursor: pointer; flex-grow: 1; }
+        .option-label { font-size: 16px; color: var(--dark); cursor: pointer; flex-grow: 1; display: flex; align-items: center; gap: 12px; }
+        .option-label i { width: 24px; font-size: 18px; color: var(--primary); }
         .input-group { margin-top: 20px; }
         .input-label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); }
-        .text-input, .select-input { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; background: white; }
-        .text-input:focus, .select-input:focus { outline: none; border-color: var(--primary); }
+        .text-input, .select-input { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; background: white; transition: var(--transition); }
+        .text-input:focus, .select-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,95,180,0.1); }
         .time-display { background: #f0f7ff; padding: 14px 18px; border-radius: 8px; border: 2px solid var(--primary-light); font-size: 16px; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 12px; }
         .two-columns { display: flex; gap: 15px; flex-wrap: wrap; }
         .two-columns .select-container { flex: 1; min-width: 150px; }
         .submit-section { text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid var(--light); }
-        .btn-submit { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 16px 45px; font-size: 18px; font-weight: 600; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; }
+        .btn-submit { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 16px 45px; font-size: 18px; font-weight: 600; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; transition: var(--transition); }
         .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(26, 95, 180, 0.4); }
         #successMessage { display: none; margin-top: 30px; padding: 25px; background: #e8f5e9; color: var(--secondary); border-radius: var(--radius); text-align: center; font-size: 18px; font-weight: 600; }
         .footer { text-align: center; color: var(--gray); font-size: 14px; padding: 20px; }
@@ -76,63 +77,86 @@
         <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
     </div>
     <form id="enqueteForm">
+        <!-- 1 -->
         <div class="question-block"><div class="question-header"><div class="question-number">1</div><div class="question-title"><span class="required">*</span> اسم المحقق</div></div>
             <input type="text" class="text-input" id="enqueteur" name="ENQUETEUR" placeholder="أدخل اسم المحقق" required><div class="error-message" id="error-enqueteur">يرجى إدخال اسم المحقق</div></div>
 
+        <!-- 2 -->
         <div class="question-block"><div class="question-header"><div class="question-number">2</div><div class="question-title"><span class="required">*</span> مكان واتجاه الاستبيان</div></div>
             <div class="two-columns"><div class="select-container"><select class="select-input" id="poste" name="POSTE" required><option value="" disabled selected>مكان الاستبيان</option><option value="P1">POSTE 1</option><option value="P2">POSTE 2</option><option value="P3">POSTE 3</option><option value="P4">POSTE 4</option></select></div>
             <div class="select-container"><select class="select-input" id="sens" name="SENS" required><option value="" disabled selected>الاتجاه</option><option value="SENS 1">الاتجاه 1</option><option value="SENS 2">الاتجاه 2</option></select></div></div>
             <div class="error-message" id="error-poste">يرجى اختيار المكان والاتجاه</div></div>
 
+        <!-- 3 Nature du véhicule avec icônes -->
         <div class="question-block"><div class="question-header"><div class="question-number">3</div><div class="question-title"><span class="required">*</span> طبيعة المركبة</div></div>
-            <div class="options"><div class="option-row"><input type="radio" id="typeVL" name="TYPE_VEHICULE" value="VL"><div class="custom-radio"></div><label for="typeVL" class="option-label">سيارة خاصة (VL)</label></div>
-            <div class="option-row"><input type="radio" id="typeVUL" name="TYPE_VEHICULE" value="VUL"><div class="custom-radio"></div><label for="typeVUL" class="option-label">شاحنة خفيفة (VUL)</label></div>
-            <div class="option-row"><input type="radio" id="typePetitTaxi" name="TYPE_VEHICULE" value="PETIT_TAXI"><div class="custom-radio"></div><label for="typePetitTaxi" class="option-label">سيارة أجرة صغيرة</label></div>
-            <div class="option-row"><input type="radio" id="typeGrandTaxi" name="TYPE_VEHICULE" value="GRAND_TAXI"><div class="custom-radio"></div><label for="typeGrandTaxi" class="option-label">سيارة أجرة كبيرة</label></div>
-            <div class="option-row"><input type="radio" id="typePL" name="TYPE_VEHICULE" value="PL"><div class="custom-radio"></div><label for="typePL" class="option-label">شاحنة ثقيلة (PL)</label></div></div>
+            <div class="options">
+                <div class="option-row"><input type="radio" id="typeVL" name="TYPE_VEHICULE" value="VL"><div class="custom-radio"></div><label for="typeVL" class="option-label"><i class="fas fa-car"></i> سيارة خاصة (VL)</label></div>
+                <div class="option-row"><input type="radio" id="typeVUL" name="TYPE_VEHICULE" value="VUL"><div class="custom-radio"></div><label for="typeVUL" class="option-label"><i class="fas fa-truck-pickup"></i> شاحنة خفيفة (VUL)</label></div>
+                <div class="option-row"><input type="radio" id="typePetitTaxi" name="TYPE_VEHICULE" value="PETIT_TAXI"><div class="custom-radio"></div><label for="typePetitTaxi" class="option-label"><i class="fas fa-taxi"></i> سيارة أجرة صغيرة</label></div>
+                <div class="option-row"><input type="radio" id="typeGrandTaxi" name="TYPE_VEHICULE" value="GRAND_TAXI"><div class="custom-radio"></div><label for="typeGrandTaxi" class="option-label"><i class="fas fa-van-shuttle"></i> سيارة أجرة كبيرة</label></div>
+                <div class="option-row"><input type="radio" id="typePL" name="TYPE_VEHICULE" value="PL"><div class="custom-radio"></div><label for="typePL" class="option-label"><i class="fas fa-truck-moving"></i> شاحنة ثقيلة (PL)</label></div>
+            </div>
             <div class="error-message" id="error-type_vehicule">يرجى اختيار طبيعة المركبة</div></div>
 
+        <!-- 4 Genre -->
         <div class="question-block"><div class="question-header"><div class="question-number">4</div><div class="question-title"><span class="required">*</span> جنس السائق</div></div>
-            <div class="options"><div class="option-row"><input type="radio" id="genreM" name="GENRE" value="MASCULIN"><div class="custom-radio"></div><label for="genreM" class="option-label">ذكر</label></div>
-            <div class="option-row"><input type="radio" id="genreF" name="GENRE" value="FEMININ"><div class="custom-radio"></div><label for="genreF" class="option-label">أنثى</label></div></div>
+            <div class="options">
+                <div class="option-row"><input type="radio" id="genreM" name="GENRE" value="MASCULIN"><div class="custom-radio"></div><label for="genreM" class="option-label"><i class="fas fa-mars"></i> ذكر</label></div>
+                <div class="option-row"><input type="radio" id="genreF" name="GENRE" value="FEMININ"><div class="custom-radio"></div><label for="genreF" class="option-label"><i class="fas fa-venus"></i> أنثى</label></div>
+            </div>
             <div class="error-message" id="error-genre">يرجى اختيار الجنس</div></div>
 
+        <!-- 5 Lieu résidence -->
         <div class="question-block"><div class="question-header"><div class="question-number">5</div><div class="question-title"><span class="required">*</span> مكان السكن الرئيسي للسائق</div></div>
-            <input type="text" class="text-input" id="lieuResidence" name="LIEU_RESIDENCE" placeholder="المدينة / الحي" required><div class="error-message" id="error-lieu_residence">يرجى تحديد مكان السكن</div></div>
+            <div class="input-group"><i class="fas fa-home" style="color:var(--primary); margin-left:8px;"></i><input type="text" class="text-input" id="lieuResidence" name="LIEU_RESIDENCE" placeholder="المدينة / الحي" required></div>
+            <div class="error-message" id="error-lieu_residence">يرجى تحديد مكان السكن</div></div>
 
+        <!-- 6 Infos voyage -->
         <div class="question-block"><div class="question-header"><div class="question-number">6</div><div class="question-title"><span class="required">*</span> معلومات الرحلة</div></div>
-            <div class="input-group"><label class="input-label">عدد الركاب</label><input type="number" class="text-input" id="nbOccup" name="NBOCCUP" placeholder="عدد الركاب" required><div class="error-message" id="error-nbOccup">يرجى إدخال عدد الركاب</div></div>
-            <div class="input-group"><label class="input-label">مكان الانطلاق</label><input type="text" class="text-input" id="origine" name="ORIGINE" placeholder="مكان الانطلاق" required><div class="error-message" id="error-origine">يرجى تحديد مكان الانطلاق</div></div>
-            <div class="input-group"><label class="input-label">مكان الوصول</label><input type="text" class="text-input" id="destination" name="DESTINATION" placeholder="مكان الوصول" required><div class="error-message" id="error-destination">يرجى تحديد مكان الوصول</div></div></div>
+            <div class="input-group"><label class="input-label"><i class="fas fa-users"></i> عدد الركاب</label><input type="number" class="text-input" id="nbOccup" name="NBOCCUP" placeholder="عدد الركاب" required><div class="error-message" id="error-nbOccup">يرجى إدخال عدد الركاب</div></div>
+            <div class="input-group"><label class="input-label"><i class="fas fa-map-marker-alt"></i> مكان الانطلاق</label><input type="text" class="text-input" id="origine" name="ORIGINE" placeholder="مكان الانطلاق" required><div class="error-message" id="error-origine">يرجى تحديد مكان الانطلاق</div></div>
+            <div class="input-group"><label class="input-label"><i class="fas fa-flag-checkered"></i> مكان الوصول</label><input type="text" class="text-input" id="destination" name="DESTINATION" placeholder="مكان الوصول" required><div class="error-message" id="error-destination">يرجى تحديد مكان الوصول</div></div></div>
 
+        <!-- 7 Q1 Provenance avec icônes -->
         <div class="question-block"><div class="question-header"><div class="question-number">7</div><div class="question-title"><span class="required">*</span> من أين أتيت؟</div></div>
-            <div class="options"><div class="option-row"><input type="radio" id="venirMaison" name="VENIR_DE" value="MAISON"><div class="custom-radio"></div><label for="venirMaison" class="option-label">منزل</label></div>
-            <div class="option-row"><input type="radio" id="venirTravail" name="VENIR_DE" value="TRAVAIL"><div class="custom-radio"></div><label for="venirTravail" class="option-label">مكان العمل</label></div>
-            <div class="option-row"><input type="radio" id="venirEcole" name="VENIR_DE" value="ECOLE"><div class="custom-radio"></div><label for="venirEcole" class="option-label">مدرسة / جامعة</label></div>
-            <div class="option-row"><input type="radio" id="venirAutre" name="VENIR_DE" value="AUTRE"><div class="custom-radio"></div><label for="venirAutre" class="option-label">آخر</label></div></div>
-            <div class="conditional-field" id="autreVenirDiv"><label class="input-label">يرجى التوضيح</label><input type="text" class="text-input" id="autreVenirTexte" name="AUTRE_VENIR" placeholder="اكتب هنا..."></div>
+            <div class="options">
+                <div class="option-row"><input type="radio" id="venirMaison" name="VENIR_DE" value="MAISON"><div class="custom-radio"></div><label for="venirMaison" class="option-label"><i class="fas fa-home"></i> منزل</label></div>
+                <div class="option-row"><input type="radio" id="venirTravail" name="VENIR_DE" value="TRAVAIL"><div class="custom-radio"></div><label for="venirTravail" class="option-label"><i class="fas fa-briefcase"></i> مكان العمل</label></div>
+                <div class="option-row"><input type="radio" id="venirEcole" name="VENIR_DE" value="ECOLE"><div class="custom-radio"></div><label for="venirEcole" class="option-label"><i class="fas fa-school"></i> مدرسة / جامعة</label></div>
+                <div class="option-row"><input type="radio" id="venirAutre" name="VENIR_DE" value="AUTRE"><div class="custom-radio"></div><label for="venirAutre" class="option-label"><i class="fas fa-question-circle"></i> آخر</label></div>
+            </div>
+            <div class="conditional-field" id="autreVenirDiv"><label class="input-label"><i class="fas fa-pen"></i> يرجى التوضيح</label><input type="text" class="text-input" id="autreVenirTexte" name="AUTRE_VENIR" placeholder="اكتب هنا..."></div>
             <div class="error-message" id="error-venir_de">يرجى تحديد من أين أتيت</div></div>
 
+        <!-- 8 Q2 Destination avec icônes -->
         <div class="question-block"><div class="question-header"><div class="question-number">8</div><div class="question-title"><span class="required">*</span> إلى أين أنت ذاهب؟</div></div>
-            <div class="options"><div class="option-row"><input type="radio" id="allerTravail" name="ALLER_A" value="TRAVAIL"><div class="custom-radio"></div><label for="allerTravail" class="option-label">مكان العمل</label></div>
-            <div class="option-row"><input type="radio" id="allerMaison" name="ALLER_A" value="MAISON"><div class="custom-radio"></div><label for="allerMaison" class="option-label">منزل</label></div>
-            <div class="option-row"><input type="radio" id="allerEcole" name="ALLER_A" value="ECOLE"><div class="custom-radio"></div><label for="allerEcole" class="option-label">مدرسة / جامعة</label></div>
-            <div class="option-row"><input type="radio" id="allerAutre" name="ALLER_A" value="AUTRE"><div class="custom-radio"></div><label for="allerAutre" class="option-label">آخر</label></div></div>
-            <div class="conditional-field" id="autreAllerDiv"><label class="input-label">يرجى التوضيح</label><input type="text" class="text-input" id="autreAllerTexte" name="AUTRE_ALLER" placeholder="اكتب هنا..."></div>
+            <div class="options">
+                <div class="option-row"><input type="radio" id="allerTravail" name="ALLER_A" value="TRAVAIL"><div class="custom-radio"></div><label for="allerTravail" class="option-label"><i class="fas fa-briefcase"></i> مكان العمل</label></div>
+                <div class="option-row"><input type="radio" id="allerMaison" name="ALLER_A" value="MAISON"><div class="custom-radio"></div><label for="allerMaison" class="option-label"><i class="fas fa-home"></i> منزل</label></div>
+                <div class="option-row"><input type="radio" id="allerEcole" name="ALLER_A" value="ECOLE"><div class="custom-radio"></div><label for="allerEcole" class="option-label"><i class="fas fa-school"></i> مدرسة / جامعة</label></div>
+                <div class="option-row"><input type="radio" id="allerAutre" name="ALLER_A" value="AUTRE"><div class="custom-radio"></div><label for="allerAutre" class="option-label"><i class="fas fa-question-circle"></i> آخر</label></div>
+            </div>
+            <div class="conditional-field" id="autreAllerDiv"><label class="input-label"><i class="fas fa-pen"></i> يرجى التوضيح</label><input type="text" class="text-input" id="autreAllerTexte" name="AUTRE_ALLER" placeholder="اكتب هنا..."></div>
             <div class="error-message" id="error-aller_a">يرجى تحديد إلى أين أنت ذاهب</div></div>
 
+        <!-- 9 Fréquence -->
         <div class="question-block"><div class="question-header"><div class="question-number">9</div><div class="question-title"><span class="required">*</span> تكرار هذا التنقل</div></div>
-            <div class="options"><div class="option-row"><input type="radio" id="freqQuotidien" name="FREQUENCE" value="quotidien"><div class="custom-radio"></div><label for="freqQuotidien" class="option-label">يومي</label></div>
-            <div class="option-row"><input type="radio" id="freqPlusieursSemaine" name="FREQUENCE" value="plusieurs_fois_semaine"><div class="custom-radio"></div><label for="freqPlusieursSemaine" class="option-label">عدة مرات في الأسبوع</label></div>
-            <div class="option-row"><input type="radio" id="freqPlusieursMois" name="FREQUENCE" value="plusieurs_fois_mois"><div class="custom-radio"></div><label for="freqPlusieursMois" class="option-label">عدة مرات في الشهر</label></div>
-            <div class="option-row"><input type="radio" id="freqUneFoisMois" name="FREQUENCE" value="une_fois_mois"><div class="custom-radio"></div><label for="freqUneFoisMois" class="option-label">مرة في الشهر</label></div>
-            <div class="option-row"><input type="radio" id="freqOccasionnel" name="FREQUENCE" value="occasionnel"><div class="custom-radio"></div><label for="freqOccasionnel" class="option-label">عرضي / نادر</label></div>
-            <div class="option-row"><input type="radio" id="freqPremiereFois" name="FREQUENCE" value="premiere_fois"><div class="custom-radio"></div><label for="freqPremiereFois" class="option-label">أول مرة</label></div></div>
+            <div class="options">
+                <div class="option-row"><input type="radio" id="freqQuotidien" name="FREQUENCE" value="quotidien"><div class="custom-radio"></div><label for="freqQuotidien" class="option-label"><i class="fas fa-calendar-day"></i> يومي</label></div>
+                <div class="option-row"><input type="radio" id="freqPlusieursSemaine" name="FREQUENCE" value="plusieurs_fois_semaine"><div class="custom-radio"></div><label for="freqPlusieursSemaine" class="option-label"><i class="fas fa-calendar-week"></i> عدة مرات في الأسبوع</label></div>
+                <div class="option-row"><input type="radio" id="freqPlusieursMois" name="FREQUENCE" value="plusieurs_fois_mois"><div class="custom-radio"></div><label for="freqPlusieursMois" class="option-label"><i class="fas fa-calendar-alt"></i> عدة مرات في الشهر</label></div>
+                <div class="option-row"><input type="radio" id="freqUneFoisMois" name="FREQUENCE" value="une_fois_mois"><div class="custom-radio"></div><label for="freqUneFoisMois" class="option-label"><i class="fas fa-calendar"></i> مرة في الشهر</label></div>
+                <div class="option-row"><input type="radio" id="freqOccasionnel" name="FREQUENCE" value="occasionnel"><div class="custom-radio"></div><label for="freqOccasionnel" class="option-label"><i class="fas fa-clock"></i> عرضي / نادر</label></div>
+                <div class="option-row"><input type="radio" id="freqPremiereFois" name="FREQUENCE" value="premiere_fois"><div class="custom-radio"></div><label for="freqPremiereFois" class="option-label"><i class="fas fa-star"></i> أول مرة</label></div>
+            </div>
             <div class="error-message" id="error-frequence">يرجى تحديد تكرار التنقل</div></div>
 
+        <!-- 10 Temps -->
         <div class="question-block"><div class="question-header"><div class="question-number">10</div><div class="question-title"><span class="required">*</span> مدة الرحلة</div></div>
-            <input type="number" class="text-input" id="tempsParcours" name="TEMPS_PARCOURS" placeholder="المدة بالدقائق" required><div class="error-message" id="error-temps_parcours">يرجى إدخال المدة</div></div>
+            <div class="input-group"><i class="fas fa-hourglass-half" style="color:var(--primary); margin-left:8px;"></i><input type="number" class="text-input" id="tempsParcours" name="TEMPS_PARCOURS" placeholder="المدة بالدقائق" required></div>
+            <div class="error-message" id="error-temps_parcours">يرجى إدخال المدة</div></div>
 
+        <!-- 11 Heure automatique -->
         <div class="question-block"><div class="question-header"><div class="question-number">11</div><div class="question-title">الوقت والتاريخ (تسجيل تلقائي)</div></div>
             <div class="time-display"><i class="fas fa-clock"></i><span id="currentTime">--:--:--</span></div>
             <input type="hidden" id="heureAuto" name="HEURE"><input type="hidden" id="dateAuto" name="DATE"></div>
