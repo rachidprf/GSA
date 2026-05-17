@@ -25,48 +25,43 @@
         body { background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%); color: var(--dark); line-height: 1.7; min-height: 100vh; padding: 20px; }
         .container { max-width: 950px; margin: 0 auto; animation: fadeIn 0.8s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .header { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 30px; margin-bottom: 30px; text-align: center; border-top: 5px solid var(--primary); position: relative; overflow: hidden; }
-        .header::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: var(--primary-light); border-radius: 0 0 0 100px; z-index: 0; }
-        .header-content { position: relative; z-index: 1; }
-        h1 { color: var(--primary); font-size: 26px; margin-bottom: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .header { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 30px; margin-bottom: 30px; text-align: center; border-top: 5px solid var(--primary); }
+        h1 { color: var(--primary); font-size: 26px; display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
         h1 i { color: var(--accent); font-size: 32px; }
         .progress-container { margin-bottom: 30px; }
-        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .progress-label { font-weight: 600; color: var(--primary); font-size: 14px; }
-        .progress-percentage { font-weight: 700; color: var(--primary); font-size: 16px; }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .progress-label { font-weight: 600; color: var(--primary); }
+        .progress-percentage { font-weight: 700; color: var(--primary); }
         .progress-bar-container { height: 10px; background-color: #e0e0e0; border-radius: 5px; overflow: hidden; }
         .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); width: 0%; transition: var(--transition); }
         #enqueteForm { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 30px; margin-bottom: 30px; }
-        .question-block { margin-bottom: 30px; padding: 25px; background: var(--light); border-radius: var(--radius); border-right: 4px solid var(--primary); transition: var(--transition); }
-        .question-block:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); }
+        .question-block { margin-bottom: 30px; padding: 25px; background: var(--light); border-radius: var(--radius); border-right: 4px solid var(--primary); }
         .question-header { display: flex; align-items: center; margin-bottom: 20px; }
-        .question-number { background: var(--primary); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; margin-left: 15px; flex-shrink: 0; }
-        .question-title { font-size: 18px; font-weight: 600; color: var(--primary); flex-grow: 1; }
+        .question-number { background: var(--primary); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-left: 15px; flex-shrink: 0; }
+        .question-title { font-size: 18px; font-weight: 600; color: var(--primary); }
         .required { color: var(--danger); margin-right: 5px; }
         .options { display: flex; flex-direction: column; gap: 12px; }
-        .option-row { display: flex; align-items: center; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e0e0e0; transition: var(--transition); cursor: pointer; }
+        .option-row { display: flex; align-items: center; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e0e0e0; cursor: pointer; }
         .option-row:hover { border-color: var(--primary); background: var(--primary-light); }
         .option-row.selected { border-color: var(--primary); background: var(--primary-light); }
-        input[type="radio"], input[type="checkbox"] { display: none; }
-        .custom-radio, .custom-checkbox { width: 22px; height: 22px; border: 2px solid var(--gray); border-radius: 50%; margin-left: 15px; position: relative; flex-shrink: 0; transition: var(--transition); }
-        .custom-checkbox { border-radius: 6px; }
-        input[type="radio"]:checked + .custom-radio, input[type="checkbox"]:checked + .custom-checkbox { border-color: var(--primary); background-color: var(--primary); }
+        input[type="radio"] { display: none; }
+        .custom-radio { width: 22px; height: 22px; border: 2px solid var(--gray); border-radius: 50%; margin-left: 15px; position: relative; flex-shrink: 0; }
+        input[type="radio"]:checked + .custom-radio { border-color: var(--primary); background-color: var(--primary); }
         input[type="radio"]:checked + .custom-radio::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: white; border-radius: 50%; }
-        input[type="checkbox"]:checked + .custom-checkbox::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 14px; font-weight: bold; }
-        .option-label { font-size: 16px; color: var(--dark); cursor: pointer; flex-grow: 1; user-select: none; }
+        .option-label { font-size: 16px; color: var(--dark); cursor: pointer; flex-grow: 1; }
         .input-group { margin-top: 20px; }
         .input-label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary); }
-        .text-input, .select-input { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; transition: var(--transition); background: white; }
-        .text-input:focus, .select-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1); }
+        .text-input, .select-input { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; background: white; }
+        .text-input:focus, .select-input:focus { outline: none; border-color: var(--primary); }
         .time-display { background: #f0f7ff; padding: 14px 18px; border-radius: 8px; border: 2px solid var(--primary-light); font-size: 16px; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 12px; }
         .two-columns { display: flex; gap: 15px; flex-wrap: wrap; }
         .two-columns .select-container { flex: 1; min-width: 150px; }
         .submit-section { text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid var(--light); }
-        .btn-submit { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 16px 45px; font-size: 18px; font-weight: 600; border-radius: 10px; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 6px 15px rgba(26, 95, 180, 0.3); }
+        .btn-submit { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 16px 45px; font-size: 18px; font-weight: 600; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; }
         .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(26, 95, 180, 0.4); }
-        #successMessage { display: none; margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: var(--secondary); border-radius: var(--radius); text-align: center; font-size: 18px; font-weight: 600; }
+        #successMessage { display: none; margin-top: 30px; padding: 25px; background: #e8f5e9; color: var(--secondary); border-radius: var(--radius); text-align: center; font-size: 18px; font-weight: 600; }
         .footer { text-align: center; color: var(--gray); font-size: 14px; padding: 20px; }
-        @media (max-width: 768px) { .container { padding: 0 10px; } .header, #enqueteForm { padding: 20px; } h1 { font-size: 22px; } .question-block { padding: 20px 15px; } .btn-submit { width: 100%; justify-content: center; } }
+        @media (max-width: 768px) { .header, #enqueteForm { padding: 20px; } h1 { font-size: 22px; } .question-block { padding: 20px 15px; } .btn-submit { width: 100%; justify-content: center; } }
         .validation-error { border-color: var(--danger) !important; }
         .error-message { color: var(--danger); font-size: 14px; margin-top: 5px; display: none; }
         .conditional-field { margin-top: 15px; padding: 15px; background: #fff9e6; border-radius: 8px; border-right: 3px solid var(--accent); display: none; }
@@ -75,226 +70,243 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <div class="header-content">
-            <h1><i class="fas fa-stadium"></i> إجراء الدراسات الخاصة بخدمة التنقل آنفا الكبرى</h1>
-        </div>
-    </div>
+    <div class="header"><h1><i class="fas fa-stadium"></i> إجراء الدراسات الخاصة بخدمة التنقل آنفا الكبرى</h1></div>
     <div class="progress-container">
-        <div class="progress-header">
-            <div class="progress-label">مستوى إكمال الاستبيان</div>
-            <div class="progress-percentage">0%</div>
-        </div>
+        <div class="progress-header"><div class="progress-label">مستوى إكمال الاستبيان</div><div class="progress-percentage">0%</div></div>
         <div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
     </div>
     <form id="enqueteForm">
-        <!-- 1. المحقق -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">1</div><div class="question-title"><span class="required">*</span> معلومات القائم بالاستبيان</div></div>
-            <div class="input-group"><label class="input-label"><i class="fas fa-user-check"></i> اسم المحقق</label><input type="text" class="text-input" id="enqueteur" name="ENQUETEUR" placeholder="أدخل اسم المحقق..." required><div class="error-message" id="error-enqueteur">يرجى إدخال اسم المحقق</div></div>
-        </div>
-        <!-- 2. مكان واتجاه الاستبيان -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">2</div><div class="question-title"><span class="required">*</span> مكان واتجاه الاستبيان</div></div>
-            <div class="two-columns">
-                <div class="select-container"><label class="input-label">مكان الاستبيان</label><select class="select-input" id="poste" name="POSTE" required><option value="" disabled selected>-- اختر --</option><option value="P1">POSTE 1</option><option value="P2">POSTE 2</option><option value="P3">POSTE 3</option><option value="P4">POSTE 4</option></select></div>
-                <div class="select-container"><label class="input-label">الاتجاه</label><select class="select-input" id="sens" name="SENS" required><option value="" disabled selected>-- اختر --</option><option value="SENS 1">SENS 1</option><option value="SENS 2">SENS 2</option></select></div>
-            </div>
-            <div class="error-message" id="error-poste">يرجى اختيار المكان والاتجاه</div>
-        </div>
-        <!-- 3. طبيعة المركبة (VL, VUL, petit taxi, grand taxi, PL) -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">3</div><div class="question-title"><span class="required">*</span> طبيعة المركبة (نوع المركبة)</div></div>
-            <div class="options">
-                <div class="option-row"><input type="radio" id="typeVL" name="TYPE_VEHICULE" value="VL" required><div class="custom-radio"></div><label for="typeVL" class="option-label"><i class="fas fa-car"></i> VL (سيارة خاصة)</label></div>
-                <div class="option-row"><input type="radio" id="typeVUL" name="TYPE_VEHICULE" value="VUL" required><div class="custom-radio"></div><label for="typeVUL" class="option-label"><i class="fas fa-truck-pickup"></i> VUL (شاحنة خفيفة)</label></div>
-                <div class="option-row"><input type="radio" id="typePetitTaxi" name="TYPE_VEHICULE" value="PETIT_TAXI" required><div class="custom-radio"></div><label for="typePetitTaxi" class="option-label"><i class="fas fa-taxi"></i> سيارة أجرة صغيرة (petit taxi)</label></div>
-                <div class="option-row"><input type="radio" id="typeGrandTaxi" name="TYPE_VEHICULE" value="GRAND_TAXI" required><div class="custom-radio"></div><label for="typeGrandTaxi" class="option-label"><i class="fas fa-van-shuttle"></i> سيارة أجرة كبيرة (grand taxi)</label></div>
-                <div class="option-row"><input type="radio" id="typePL" name="TYPE_VEHICULE" value="PL" required><div class="custom-radio"></div><label for="typePL" class="option-label"><i class="fas fa-truck-moving"></i> شاحنة ثقيلة (PL)</label></div>
-            </div>
-            <div class="error-message" id="error-type_vehicule">يرجى اختيار طبيعة المركبة</div>
-        </div>
-        <!-- 4. جنس السائق -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">4</div><div class="question-title"><span class="required">*</span> جنس السائق</div></div>
-            <div class="options">
-                <div class="option-row"><input type="radio" id="genreM" name="GENRE" value="MASCULIN" required><div class="custom-radio"></div><label for="genreM" class="option-label"><i class="fas fa-mars"></i> ذكر</label></div>
-                <div class="option-row"><input type="radio" id="genreF" name="GENRE" value="FEMININ" required><div class="custom-radio"></div><label for="genreF" class="option-label"><i class="fas fa-venus"></i> أنثى</label></div>
-            </div>
-            <div class="error-message" id="error-genre">يرجى اختيار الجنس</div>
-        </div>
-        <!-- 5. عدد الركاب + origine + destination -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">5</div><div class="question-title"><span class="required">*</span> معلومات الرحلة</div></div>
-            <div class="input-group"><label class="input-label"><i class="fas fa-users"></i> عدد الركاب</label><input type="number" class="text-input" id="nbOccup" name="NBOCCUP" placeholder="عدد الركاب" required><div class="error-message" id="error-nbOccup">يرجى إدخال عدد الركاب</div></div>
-            <div class="input-group"><label class="input-label"><i class="fas fa-map-marker-alt"></i> مكان الانطلاق</label><input type="text" class="text-input" id="origine" name="ORIGINE" placeholder="مكان الانطلاق" required><div class="error-message" id="error-origine">يرجى تحديد مكان الانطلاق</div></div>
-            <div class="input-group"><label class="input-label"><i class="fas fa-flag-checkered"></i> مكان الوصول</label><input type="text" class="text-input" id="destination" name="DESTINATION" placeholder="مكان الوصول" required><div class="error-message" id="error-destination">يرجى تحديد مكان الوصول</div></div>
-        </div>
-        <!-- 6. Motif principal détaillé -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">6</div><div class="question-title"><span class="required">*</span> الغرض الرئيسي من التنقل</div></div>
-            <div class="options">
-                <div class="option-row"><input type="radio" id="motifDomicileTravail" name="MOTIF" value="DOMICILE_TRAVAIL" required><div class="custom-radio"></div><label for="motifDomicileTravail" class="option-label">🏠 ➜ 💼 منزل – عمل (domicile–travail)</label></div>
-                <div class="option-row"><input type="radio" id="motifDomicileEtudes" name="MOTIF" value="DOMICILE_ETUDES"><div class="custom-radio"></div><label for="motifDomicileEtudes" class="option-label">🏠 ➜ 📚 منزل – دراسات (domicile–études)</label></div>
-                <div class="option-row"><input type="radio" id="motifProfessionnelAutre" name="MOTIF" value="PROFESSIONNEL_AUTRE"><div class="custom-radio"></div><label for="motifProfessionnelAutre" class="option-label">💼 غرض مهني آخر (autre motif professionnel)</label></div>
-                <div class="option-row"><input type="radio" id="motifLoisirs" name="MOTIF" value="LOISIRS"><div class="custom-radio"></div><label for="motifLoisirs" class="option-label">🎉 ترفيه / أنشطة (loisirs)</label></div>
-                <div class="option-row"><input type="radio" id="motifVisiteFamiliale" name="MOTIF" value="VISITE_FAMILIALE"><div class="custom-radio"></div><label for="motifVisiteFamiliale" class="option-label">👪 زيارة عائلية (visite familiale)</label></div>
-                <div class="option-row"><input type="radio" id="motifTourisme" name="MOTIF" value="TOURISME"><div class="custom-radio"></div><label for="motifTourisme" class="option-label">🌴 سياحة (tourisme)</label></div>
-                <div class="option-row"><input type="radio" id="motifAutre" name="MOTIF" value="AUTRE"><div class="custom-radio"></div><label for="motifAutre" class="option-label">❓ آخر (autre)</label></div>
-            </div>
-            <div class="conditional-field" id="autreMotifDiv"><label class="input-label">يرجى تحديد الغرض الآخر بدقة</label><input type="text" class="text-input" id="autreMotifTexte" name="AUTRE_MOTIF" placeholder="مثال: زيارة طبيب، توصيل أشخاص ..."></div>
-            <div class="error-message" id="error-motif">يرجى اختيار الغرض الرئيسي</div>
-        </div>
-        <!-- 7. Fréquence détaillée -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">7</div><div class="question-title"><span class="required">*</span> تكرار هذا التنقل</div></div>
-            <div class="options">
-                <div class="option-row"><input type="radio" id="freqQuotidien" name="FREQUENCE" value="quotidien" required><div class="custom-radio"></div><label for="freqQuotidien" class="option-label">📅 يومي (quotidien)</label></div>
-                <div class="option-row"><input type="radio" id="freqPlusieursSemaine" name="FREQUENCE" value="plusieurs_fois_semaine"><div class="custom-radio"></div><label for="freqPlusieursSemaine" class="option-label">🗓️ عدة مرات في الأسبوع (plusieurs fois/semaine)</label></div>
-                <div class="option-row"><input type="radio" id="freqPlusieursMois" name="FREQUENCE" value="plusieurs_fois_mois"><div class="custom-radio"></div><label for="freqPlusieursMois" class="option-label">📆 عدة مرات في الشهر (plusieurs fois/mois)</label></div>
-                <div class="option-row"><input type="radio" id="freqUneFoisMois" name="FREQUENCE" value="une_fois_mois"><div class="custom-radio"></div><label for="freqUneFoisMois" class="option-label">📅 مرة في الشهر (une fois par mois)</label></div>
-                <div class="option-row"><input type="radio" id="freqOccasionnel" name="FREQUENCE" value="occasionnel"><div class="custom-radio"></div><label for="freqOccasionnel" class="option-label">⏳ عرضي / نادر (occasionnel)</label></div>
-                <div class="option-row"><input type="radio" id="freqPremiereFois" name="FREQUENCE" value="premiere_fois"><div class="custom-radio"></div><label for="freqPremiereFois" class="option-label">🌟 أول مرة (première fois)</label></div>
-            </div>
-            <div class="error-message" id="error-frequence">يرجى تحديد تكرار التنقل</div>
-        </div>
-        <!-- 8. Temps de parcours -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">8</div><div class="question-title"><span class="required">*</span> مدة الرحلة (وقت السفر)</div></div>
-            <div class="input-group"><label class="input-label"><i class="fas fa-hourglass-half"></i> الوقت المستغرق من الانطلاق إلى الوصول</label><input type="number" class="text-input" id="tempsParcours" name="TEMPS_PARCOURS" placeholder="أدخل المدة بالدقائق" required><div class="error-message" id="error-temps_parcours">يرجى إدخال مدة الرحلة (بالدقائق)</div></div>
-        </div>
-        <!-- 9. Heure automatique -->
-        <div class="question-block">
-            <div class="question-header"><div class="question-number">9</div><div class="question-title">الوقت والتاريخ (تلقائي)</div></div>
-            <div class="time-display"><i class="fas fa-clock"></i><span id="currentTime">--:-- --</span></div>
-            <input type="hidden" id="heureAuto" name="HEURE"><input type="hidden" id="dateAuto" name="DATE">
-        </div>
-        <div class="submit-section">
-            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> إرسال الاستبيان</button>
-            <div id="successMessage"><i class="fas fa-check-circle"></i> ✅ شكراً! تم إرسال الاستبيان بنجاح.</div>
-        </div>
+        <div class="question-block"><div class="question-header"><div class="question-number">1</div><div class="question-title"><span class="required">*</span> اسم المحقق</div></div>
+            <input type="text" class="text-input" id="enqueteur" name="ENQUETEUR" placeholder="أدخل اسم المحقق" required><div class="error-message" id="error-enqueteur">يرجى إدخال اسم المحقق</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">2</div><div class="question-title"><span class="required">*</span> مكان واتجاه الاستبيان</div></div>
+            <div class="two-columns"><div class="select-container"><select class="select-input" id="poste" name="POSTE" required><option value="" disabled selected>مكان الاستبيان</option><option value="P1">POSTE 1</option><option value="P2">POSTE 2</option><option value="P3">POSTE 3</option><option value="P4">POSTE 4</option></select></div>
+            <div class="select-container"><select class="select-input" id="sens" name="SENS" required><option value="" disabled selected>الاتجاه</option><option value="SENS 1">الاتجاه 1</option><option value="SENS 2">الاتجاه 2</option></select></div></div>
+            <div class="error-message" id="error-poste">يرجى اختيار المكان والاتجاه</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">3</div><div class="question-title"><span class="required">*</span> طبيعة المركبة</div></div>
+            <div class="options"><div class="option-row"><input type="radio" id="typeVL" name="TYPE_VEHICULE" value="VL"><div class="custom-radio"></div><label for="typeVL" class="option-label">سيارة خاصة (VL)</label></div>
+            <div class="option-row"><input type="radio" id="typeVUL" name="TYPE_VEHICULE" value="VUL"><div class="custom-radio"></div><label for="typeVUL" class="option-label">شاحنة خفيفة (VUL)</label></div>
+            <div class="option-row"><input type="radio" id="typePetitTaxi" name="TYPE_VEHICULE" value="PETIT_TAXI"><div class="custom-radio"></div><label for="typePetitTaxi" class="option-label">سيارة أجرة صغيرة</label></div>
+            <div class="option-row"><input type="radio" id="typeGrandTaxi" name="TYPE_VEHICULE" value="GRAND_TAXI"><div class="custom-radio"></div><label for="typeGrandTaxi" class="option-label">سيارة أجرة كبيرة</label></div>
+            <div class="option-row"><input type="radio" id="typePL" name="TYPE_VEHICULE" value="PL"><div class="custom-radio"></div><label for="typePL" class="option-label">شاحنة ثقيلة (PL)</label></div></div>
+            <div class="error-message" id="error-type_vehicule">يرجى اختيار طبيعة المركبة</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">4</div><div class="question-title"><span class="required">*</span> جنس السائق</div></div>
+            <div class="options"><div class="option-row"><input type="radio" id="genreM" name="GENRE" value="MASCULIN"><div class="custom-radio"></div><label for="genreM" class="option-label">ذكر</label></div>
+            <div class="option-row"><input type="radio" id="genreF" name="GENRE" value="FEMININ"><div class="custom-radio"></div><label for="genreF" class="option-label">أنثى</label></div></div>
+            <div class="error-message" id="error-genre">يرجى اختيار الجنس</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">5</div><div class="question-title"><span class="required">*</span> مكان السكن الرئيسي للسائق</div></div>
+            <input type="text" class="text-input" id="lieuResidence" name="LIEU_RESIDENCE" placeholder="المدينة / الحي" required><div class="error-message" id="error-lieu_residence">يرجى تحديد مكان السكن</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">6</div><div class="question-title"><span class="required">*</span> معلومات الرحلة</div></div>
+            <div class="input-group"><label class="input-label">عدد الركاب</label><input type="number" class="text-input" id="nbOccup" name="NBOCCUP" placeholder="عدد الركاب" required><div class="error-message" id="error-nbOccup">يرجى إدخال عدد الركاب</div></div>
+            <div class="input-group"><label class="input-label">مكان الانطلاق</label><input type="text" class="text-input" id="origine" name="ORIGINE" placeholder="مكان الانطلاق" required><div class="error-message" id="error-origine">يرجى تحديد مكان الانطلاق</div></div>
+            <div class="input-group"><label class="input-label">مكان الوصول</label><input type="text" class="text-input" id="destination" name="DESTINATION" placeholder="مكان الوصول" required><div class="error-message" id="error-destination">يرجى تحديد مكان الوصول</div></div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">7</div><div class="question-title"><span class="required">*</span> من أين أتيت؟</div></div>
+            <div class="options"><div class="option-row"><input type="radio" id="venirMaison" name="VENIR_DE" value="MAISON"><div class="custom-radio"></div><label for="venirMaison" class="option-label">منزل</label></div>
+            <div class="option-row"><input type="radio" id="venirTravail" name="VENIR_DE" value="TRAVAIL"><div class="custom-radio"></div><label for="venirTravail" class="option-label">مكان العمل</label></div>
+            <div class="option-row"><input type="radio" id="venirEcole" name="VENIR_DE" value="ECOLE"><div class="custom-radio"></div><label for="venirEcole" class="option-label">مدرسة / جامعة</label></div>
+            <div class="option-row"><input type="radio" id="venirAutre" name="VENIR_DE" value="AUTRE"><div class="custom-radio"></div><label for="venirAutre" class="option-label">آخر</label></div></div>
+            <div class="conditional-field" id="autreVenirDiv"><label class="input-label">يرجى التوضيح</label><input type="text" class="text-input" id="autreVenirTexte" name="AUTRE_VENIR" placeholder="اكتب هنا..."></div>
+            <div class="error-message" id="error-venir_de">يرجى تحديد من أين أتيت</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">8</div><div class="question-title"><span class="required">*</span> إلى أين أنت ذاهب؟</div></div>
+            <div class="options"><div class="option-row"><input type="radio" id="allerTravail" name="ALLER_A" value="TRAVAIL"><div class="custom-radio"></div><label for="allerTravail" class="option-label">مكان العمل</label></div>
+            <div class="option-row"><input type="radio" id="allerMaison" name="ALLER_A" value="MAISON"><div class="custom-radio"></div><label for="allerMaison" class="option-label">منزل</label></div>
+            <div class="option-row"><input type="radio" id="allerEcole" name="ALLER_A" value="ECOLE"><div class="custom-radio"></div><label for="allerEcole" class="option-label">مدرسة / جامعة</label></div>
+            <div class="option-row"><input type="radio" id="allerAutre" name="ALLER_A" value="AUTRE"><div class="custom-radio"></div><label for="allerAutre" class="option-label">آخر</label></div></div>
+            <div class="conditional-field" id="autreAllerDiv"><label class="input-label">يرجى التوضيح</label><input type="text" class="text-input" id="autreAllerTexte" name="AUTRE_ALLER" placeholder="اكتب هنا..."></div>
+            <div class="error-message" id="error-aller_a">يرجى تحديد إلى أين أنت ذاهب</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">9</div><div class="question-title"><span class="required">*</span> تكرار هذا التنقل</div></div>
+            <div class="options"><div class="option-row"><input type="radio" id="freqQuotidien" name="FREQUENCE" value="quotidien"><div class="custom-radio"></div><label for="freqQuotidien" class="option-label">يومي</label></div>
+            <div class="option-row"><input type="radio" id="freqPlusieursSemaine" name="FREQUENCE" value="plusieurs_fois_semaine"><div class="custom-radio"></div><label for="freqPlusieursSemaine" class="option-label">عدة مرات في الأسبوع</label></div>
+            <div class="option-row"><input type="radio" id="freqPlusieursMois" name="FREQUENCE" value="plusieurs_fois_mois"><div class="custom-radio"></div><label for="freqPlusieursMois" class="option-label">عدة مرات في الشهر</label></div>
+            <div class="option-row"><input type="radio" id="freqUneFoisMois" name="FREQUENCE" value="une_fois_mois"><div class="custom-radio"></div><label for="freqUneFoisMois" class="option-label">مرة في الشهر</label></div>
+            <div class="option-row"><input type="radio" id="freqOccasionnel" name="FREQUENCE" value="occasionnel"><div class="custom-radio"></div><label for="freqOccasionnel" class="option-label">عرضي / نادر</label></div>
+            <div class="option-row"><input type="radio" id="freqPremiereFois" name="FREQUENCE" value="premiere_fois"><div class="custom-radio"></div><label for="freqPremiereFois" class="option-label">أول مرة</label></div></div>
+            <div class="error-message" id="error-frequence">يرجى تحديد تكرار التنقل</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">10</div><div class="question-title"><span class="required">*</span> مدة الرحلة</div></div>
+            <input type="number" class="text-input" id="tempsParcours" name="TEMPS_PARCOURS" placeholder="المدة بالدقائق" required><div class="error-message" id="error-temps_parcours">يرجى إدخال المدة</div></div>
+
+        <div class="question-block"><div class="question-header"><div class="question-number">11</div><div class="question-title">الوقت والتاريخ (تسجيل تلقائي)</div></div>
+            <div class="time-display"><i class="fas fa-clock"></i><span id="currentTime">--:--:--</span></div>
+            <input type="hidden" id="heureAuto" name="HEURE"><input type="hidden" id="dateAuto" name="DATE"></div>
+
+        <div class="submit-section"><button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> إرسال الاستبيان</button>
+        <div id="successMessage">✅ شكراً! تم إرسال الاستبيان بنجاح.</div></div>
     </form>
-    <div class="footer"><p>شكراً لمشاركتك القيمة في هذا الاستبيان.</p><p><i class="fas fa-shield-alt"></i> نحن نحترم خصوصيتك - جميع البيانات مجهولة الهوية</p><p>© 2026 - MOBIDEP / RSTD - جميع الحقوق محفوظة</p></div>
+    <div class="footer"><p>شكراً لمشاركتكم القيمة</p><p>© 2026 - MOBIDEP / RSTD</p></div>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         updateProgressBar();
         setupEventListeners();
         updateCurrentTime();
-        setInterval(updateCurrentTime, 60000);
+        setInterval(updateCurrentTime, 1000);
         loadAutoSavedData();
     });
+    
     function updateCurrentTime() {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
-        const dateString = now.toLocaleDateString('ar-EG');
-        document.getElementById('currentTime').innerText = timeString + ' - ' + dateString;
-        document.getElementById('heureAuto').value = timeString;
-        document.getElementById('dateAuto').value = dateString;
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const year = now.getFullYear();
+        document.getElementById('currentTime').innerText = `${hours}:${minutes}:${seconds} - ${day}/${month}/${year}`;
+        document.getElementById('heureAuto').value = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('dateAuto').value = `${day}/${month}/${year}`;
     }
+    
     function setupEventListeners() {
         document.querySelectorAll('.option-row').forEach(row => {
             const input = row.querySelector('input');
-            if (!input) return;
-            row.addEventListener('click', function(e) {
+            row.addEventListener('click', function() {
                 if (input.type === 'radio') {
-                    document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => { let rr = r.closest('.option-row'); if(rr) rr.classList.remove('selected'); });
+                    document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => {
+                        let rr = r.closest('.option-row');
+                        if(rr) rr.classList.remove('selected');
+                    });
                     input.checked = true;
                     row.classList.add('selected');
-                    if (input.name === 'MOTIF') handleAutreMotif(input.value);
+                    if (input.name === 'VENIR_DE') toggleAutre('VENIR_DE', input.value);
+                    if (input.name === 'ALLER_A') toggleAutre('ALLER_A', input.value);
                     updateProgressBar();
-                    clearErrorGeneric(input);
+                    clearError(input);
                     autoSave();
                 }
             });
             if (input.checked) row.classList.add('selected');
         });
+        
         document.querySelectorAll('.text-input, .select-input').forEach(field => {
-            field.addEventListener('input', () => { updateProgressBar(); clearErrorGeneric(field); autoSave(); });
-            field.addEventListener('change', () => { updateProgressBar(); clearErrorGeneric(field); autoSave(); });
+            field.addEventListener('input', function() { updateProgressBar(); clearError(this); autoSave(); });
+            field.addEventListener('change', function() { updateProgressBar(); clearError(this); autoSave(); });
         });
+        
         document.getElementById('enqueteForm').addEventListener('submit', handleSubmit);
     }
-    function handleAutreMotif(val) {
-        const autreDiv = document.getElementById('autreMotifDiv');
-        if (val === 'AUTRE') {
-            autreDiv.classList.add('show');
-            document.getElementById('autreMotifTexte').setAttribute('required', 'required');
-        } else {
-            autreDiv.classList.remove('show');
-            document.getElementById('autreMotifTexte').removeAttribute('required');
-            document.getElementById('autreMotifTexte').value = '';
+    
+    function toggleAutre(fieldName, value) {
+        const isAutre = (value === 'AUTRE');
+        if (fieldName === 'VENIR_DE') {
+            const div = document.getElementById('autreVenirDiv');
+            const input = document.getElementById('autreVenirTexte');
+            if (isAutre) {
+                div.classList.add('show');
+                input.setAttribute('required', 'required');
+            } else {
+                div.classList.remove('show');
+                input.removeAttribute('required');
+                input.value = '';
+            }
+        } else if (fieldName === 'ALLER_A') {
+            const div = document.getElementById('autreAllerDiv');
+            const input = document.getElementById('autreAllerTexte');
+            if (isAutre) {
+                div.classList.add('show');
+                input.setAttribute('required', 'required');
+            } else {
+                div.classList.remove('show');
+                input.removeAttribute('required');
+                input.value = '';
+            }
         }
         updateProgressBar();
     }
+    
     function updateProgressBar() {
         let total = 0, answered = 0;
         const fields = [
-            { elem: document.getElementById('enqueteur'), cond: (e) => e.value.trim() !== '' },
-            { elem: document.getElementById('poste'), cond: (e) => e.value && e.value !== '' },
-            { elem: document.getElementById('sens'), cond: (e) => e.value && e.value !== '' },
-            { elem: document.querySelector('input[name="TYPE_VEHICULE"]:checked'), cond: (e) => e !== null },
-            { elem: document.querySelector('input[name="GENRE"]:checked'), cond: (e) => e !== null },
-            { elem: document.getElementById('nbOccup'), cond: (e) => e.value.trim() !== '' },
-            { elem: document.getElementById('origine'), cond: (e) => e.value.trim() !== '' },
-            { elem: document.getElementById('destination'), cond: (e) => e.value.trim() !== '' },
-            { elem: document.querySelector('input[name="MOTIF"]:checked'), cond: (e) => e !== null },
-            { elem: document.querySelector('input[name="FREQUENCE"]:checked'), cond: (e) => e !== null },
-            { elem: document.getElementById('tempsParcours'), cond: (e) => e.value.trim() !== '' }
+            { elem: document.getElementById('enqueteur'), cond: e => e.value.trim() !== '' },
+            { elem: document.getElementById('poste'), cond: e => e.value && e.value !== '' },
+            { elem: document.getElementById('sens'), cond: e => e.value && e.value !== '' },
+            { elem: document.querySelector('input[name="TYPE_VEHICULE"]:checked'), cond: e => e !== null },
+            { elem: document.querySelector('input[name="GENRE"]:checked'), cond: e => e !== null },
+            { elem: document.getElementById('lieuResidence'), cond: e => e.value.trim() !== '' },
+            { elem: document.getElementById('nbOccup'), cond: e => e.value.trim() !== '' },
+            { elem: document.getElementById('origine'), cond: e => e.value.trim() !== '' },
+            { elem: document.getElementById('destination'), cond: e => e.value.trim() !== '' },
+            { elem: document.querySelector('input[name="VENIR_DE"]:checked'), cond: e => e !== null },
+            { elem: document.querySelector('input[name="ALLER_A"]:checked'), cond: e => e !== null },
+            { elem: document.querySelector('input[name="FREQUENCE"]:checked'), cond: e => e !== null },
+            { elem: document.getElementById('tempsParcours'), cond: e => e.value.trim() !== '' }
         ];
         fields.forEach(f => { total++; if (f.cond(f.elem)) answered++; });
         let progress = (answered / total) * 100;
         document.getElementById('progressBar').style.width = `${progress}%`;
         document.querySelector('.progress-percentage').innerText = `${Math.round(progress)}%`;
     }
-    function clearErrorGeneric(input) {
+    
+    function clearError(input) {
         input.classList.remove('validation-error');
         let errId = input.id ? `error-${input.id}` : null;
         if (!errId && input.name) errId = `error-${input.name.toLowerCase()}`;
         if (errId) { let errDiv = document.getElementById(errId); if (errDiv) errDiv.style.display = 'none'; }
     }
-    function showErrorMsg(input, msg) {
+    
+    function showError(input, msg) {
         input.classList.add('validation-error');
         let errId = input.id ? `error-${input.id}` : null;
         if (!errId && input.name) errId = `error-${input.name.toLowerCase()}`;
         if (errId) { let errDiv = document.getElementById(errId); if (errDiv) { errDiv.innerText = msg; errDiv.style.display = 'block'; } }
     }
+    
     function handleSubmit(e) {
         e.preventDefault();
         let isValid = true;
+        
         document.querySelectorAll('.text-input[required], .select-input[required]').forEach(inp => {
-            if (!inp.value.trim()) { isValid = false; showErrorMsg(inp, 'هذا الحقل مطلوب'); }
-            else clearErrorGeneric(inp);
+            if (!inp.value.trim()) { isValid = false; showError(inp, 'هذا الحقل مطلوب'); }
+            else clearError(inp);
         });
-        ['TYPE_VEHICULE', 'GENRE', 'MOTIF', 'FREQUENCE'].forEach(rn => {
+        
+        ['TYPE_VEHICULE', 'GENRE', 'VENIR_DE', 'ALLER_A', 'FREQUENCE'].forEach(rn => {
             if (!document.querySelector(`input[name="${rn}"]:checked`)) {
                 isValid = false;
                 let errDiv = document.getElementById(`error-${rn.toLowerCase()}`);
                 if (errDiv) errDiv.style.display = 'block';
             }
         });
-        const motifChecked = document.querySelector('input[name="MOTIF"]:checked');
-        if (motifChecked && motifChecked.value === 'AUTRE') {
-            let autreText = document.getElementById('autreMotifTexte');
-            if (!autreText.value.trim()) { isValid = false; showErrorMsg(autreText, 'يرجى تحديد الغرض الآخر بدقة'); }
+        
+        const venirChecked = document.querySelector('input[name="VENIR_DE"]:checked');
+        if (venirChecked && venirChecked.value === 'AUTRE') {
+            let autreText = document.getElementById('autreVenirTexte');
+            if (!autreText.value.trim()) { isValid = false; showError(autreText, 'يرجى التوضيح'); }
         }
+        
+        const allerChecked = document.querySelector('input[name="ALLER_A"]:checked');
+        if (allerChecked && allerChecked.value === 'AUTRE') {
+            let autreText = document.getElementById('autreAllerTexte');
+            if (!autreText.value.trim()) { isValid = false; showError(autreText, 'يرجى التوضيح'); }
+        }
+        
         if (!isValid) return;
+        
         updateCurrentTime();
         const form = e.target;
         const data = new FormData(form);
-        const submitBtn = document.querySelector('.btn-submit');
-        const original = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
-        submitBtn.disabled = true;
+        const btn = document.querySelector('.btn-submit');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+        btn.disabled = true;
+        
         fetch("https://script.google.com/macros/s/AKfycbw9jGp-wf4TWX8IWcazIBrSyrIwElC9wR6sw8kOVwv_MZuITQFR7BNfLGHo-en89lcU/exec", {
             method: "POST", body: data
-        }).then(res => res.text()).then(() => {
+        }).then(() => {
             document.getElementById('successMessage').style.display = 'block';
-            setTimeout(() => { form.reset(); document.querySelectorAll('.option-row.selected').forEach(r => r.classList.remove('selected')); document.getElementById('autreMotifDiv').classList.remove('show'); updateProgressBar(); updateCurrentTime(); localStorage.removeItem('enqueteFormData'); }, 2000);
+            setTimeout(() => { form.reset(); document.querySelectorAll('.option-row.selected').forEach(r => r.classList.remove('selected')); document.getElementById('autreVenirDiv').classList.remove('show'); document.getElementById('autreAllerDiv').classList.remove('show'); updateProgressBar(); updateCurrentTime(); localStorage.removeItem('enqueteFormData'); }, 2000);
             setTimeout(() => { document.getElementById('successMessage').style.display = 'none'; }, 5000);
-        }).catch(err => { alert('❌ حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.'); console.error(err); })
-        .finally(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; });
+        }).catch(err => { alert('❌ حدث خطأ أثناء الإرسال'); console.error(err); })
+        .finally(() => { btn.innerHTML = original; btn.disabled = false; });
     }
+    
     function autoSave() {
         let saved = {};
         document.querySelectorAll('#enqueteForm input, #enqueteForm select').forEach(el => {
@@ -303,6 +315,7 @@
         });
         localStorage.setItem('enqueteFormData', JSON.stringify(saved));
     }
+    
     function loadAutoSavedData() {
         let saved = localStorage.getItem('enqueteFormData');
         if (!saved) return;
@@ -312,7 +325,7 @@
             if (!input) continue;
             if (input.type === 'radio') {
                 let radio = document.querySelector(`[name="${key}"][value="${data[key]}"]`);
-                if (radio) { radio.checked = true; let row = radio.closest('.option-row'); if(row) row.classList.add('selected'); if(key === 'MOTIF') handleAutreMotif(data[key]); }
+                if (radio) { radio.checked = true; let row = radio.closest('.option-row'); if(row) row.classList.add('selected'); if(key === 'VENIR_DE') toggleAutre('VENIR_DE', data[key]); if(key === 'ALLER_A') toggleAutre('ALLER_A', data[key]); }
             } else if (input.type !== 'hidden') {
                 input.value = data[key];
             }
